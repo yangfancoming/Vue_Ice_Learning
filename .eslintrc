@@ -1,0 +1,11 @@
+{
+  "root": true,
+  "extends": ["plugin:vue/essential", "@vue/airbnb"],
+  "rules": {
+    "import/extensions": 0,
+    "no-mixed-operators": 0,
+    "max-len": 0,
+    "camelcase": 0,
+    "import/no-unresolved": 0
+  }
+}
