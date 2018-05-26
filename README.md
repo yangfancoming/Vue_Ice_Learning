@@ -4,9 +4,9 @@
  那么请  cnpm install --save-dev node-sass   貌似阿里的一个bug  node-sass 初始化的时候 安装不上
    ##  技术栈: (未完待续)
        # 前端：vue.js 2.5 + element-UI + jsonserver + mock.js
-        1.采用 Vue-Video-Player 视频播放插件
-        2.采用 audio 音频播放插件
-        3.采用 谷歌 guava Java核心库
+         1.采用 Vue-Video-Player 视频播放插件
+         2.采用 audio 音频播放插件
+         3.采用 谷歌 guava Java核心库
        # 后端：springboot + Mybatis + SpringSecurity
          1.采用 easypoi 插件 对表格进行导入导出 
          2.采用 Hibernate Validator 插件 对数据进行校检
