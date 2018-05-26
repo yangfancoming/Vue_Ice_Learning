@@ -18,54 +18,12 @@
                 <span class="show-pwd" ><svg-icon icon-class="eye" /></span>
             </el-form-item>
 
+
             <el-form-item>
-                <el-button type="primary" style="width:100%;" > 登录</el-button>
+                <el-button type="primary" class="submit-btn" size="small" @click="submitBtn"> 登 录</el-button>    <!--<a href="/" class="link"> 可以直接跳转 </a>-->
             </el-form-item>
         </el-form>
-          <!--<div class="form-items">-->
-            <!--<el-row class="form-item">-->
-              <!--<el-col>-->
-                <!--<el-form-item prop="username" :rules="[ { required: true, message: '会员名/邮箱/手机号不能为空'}]">-->
-                  <!--<div class="form-line">-->
-                    <!--<i class="el-icon-edit-outline input-icon"></i>-->
-                    <!--<el-input placeholder="会员名/邮箱/手机号" v-model="user.username"></el-input>-->
-                  <!--</div>-->
-                <!--</el-form-item>-->
-              <!--</el-col>-->
-            <!--</el-row>-->
-            <!--<el-row class="form-item">-->
-              <!--<el-col>-->
-                <!--<el-form-item prop="password" :rules="[ { required: true, message: '密码不能为空'}]">-->
-                  <!--<div class="form-line">-->
-                    <!--<i class="el-icon-service input-icon"></i>-->
-                    <!--<el-input type="password" placeholder="密码" v-model="user.password"></el-input>-->
-                  <!--</div>-->
-                <!--</el-form-item>-->
-              <!--</el-col>-->
-            <!--</el-row>-->
-            <!--<el-row class=form-item>-->
-              <!--<el-col>-->
-                <!--<el-form-item>-->
-                  <!--<el-checkbox class="checkbox">记住账号</el-checkbox>-->
-                <!--</el-form-item>-->
-              <!--</el-col>-->
-            <!--</el-row>-->
-            <!--<el-row class="form-item">-->
-              <!--<el-button type="primary" class="submit-btn" size="small" @click="submitBtn">-->
-                <!--登 录-->
-              <!--</el-button>-->
-            <!--</el-row>-->
-          <!--</div>-->
-          <!--<el-row class="tips">-->
-            <!--<a href="/" class="link">-->
-              <!--立即注册-->
-            <!--</a>-->
-            <!--<span class="line">|</span>-->
-            <!--<a href="/" class="link">-->
-              <!--忘记密码-->
-            <!--</a>-->
-          <!--</el-row>-->
-        <!--</el-form>-->
+
       </div>
     </div>
   </div>
@@ -82,17 +40,14 @@ export default {
   data() {
     return {
       backgroundImage: backgroundImage,
-      user: {
-        username: '',
-        password: '',
-      },
+      user: {  username: '',password: '',},
     };
   },
 
-  created() {},
 
   methods: {
     submitBtn() {
+        this.$router.push('/');
       this.$refs['form'].validate((valid) => {
         if (valid) {
           this.$message({

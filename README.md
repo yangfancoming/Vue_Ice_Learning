@@ -13,14 +13,19 @@
          3.采用 Mybatis 分页插件 PageHelper
 
 
+  ##  引入登录页面:
+    # 由于 使用阿里的icework生成的项目 并没有登录页 所以我们需要引入登录页面
+    # 1.routerConfig.js 文件中  
+    import Login from './pages/Login/Login.vue';  // sos 2. 这里加入 登录页面
+    # 2.routerConfig.js 文件中
+    { path: '/login',layout: Login,component: Login,},// sos 注意这里加入 login登录页面的 方式！
 
 
-
-  ##  引入新增页面方法:
+  ##  引入新增页面:
     # 1.menuConfig.js 文件中 
      { path: '/test',name: '测试页', },  // sos 1. 这里加入 新增页面信息
     # 2.routerConfig.js 文件中  
-    import Test from './pages/Test/Test.vue';  // sos 2. 这里加入 新增页面信息
+    import Test from './pages/Test/Test.vue';  // sos 2. 这里加入 新增页面
     # 3.routerConfig.js 文件中
     { path: '/dashboard/test',layout: HeaderAsideLayout,component: Test,},  // sos 3. 这里加入 新增页面信息
     
