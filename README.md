@@ -7,7 +7,7 @@
  
 ## 项目截图
 
-![image](https://github.com/jwfl724168/Vue_Ice_Learning/tree/master/src/assets/1.jpg)
+![image](https://github.com/jwfl724168/Vue_Ice_Learning/tree/master/src/assets/1.png)
 
 
    ##  技术栈: (未完待续)
