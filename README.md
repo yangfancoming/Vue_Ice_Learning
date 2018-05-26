@@ -9,7 +9,6 @@
           (http://github.com/yourname/your-repository/raw/master/images-folder/xxx.png)
 
 
-
    ##  技术栈: (未完待续)
        # 前端：vue.js 2.5 + element-UI + jsonserver + mock.js
          1.采用 Vue-Video-Player 视频播放插件
@@ -47,8 +46,21 @@
             render: h => h(App),
         }).$mount('#app');
     # 3. 在 xxx.vue 文件中  即 可以 通过 {{ $store.state.count }} 使用
-    
-    
+  ##  引入 mock数据  json-server
+          1.引入两个依赖： "json-server": "^0.12.1",  "underscore": "^1.8.3"
+          2.建立mock文件夹 其内容 参考 项目中的 json文件 和 server.js文件
+          3.在 package.json 文件中 加入 "mock": "node mock/server.js", 在命令行 输入 npm run mock 命令 即可开启 jsonserver 服务
+          4.服务开启后 在浏览器中 输入 http://127.0.0.1:9090/db 可以看到 本地json文件中的数据 正常响应。
+          ps： http://127.0.0.1:9090/json文件名  可以直接访问 文件中的数据。(此配置 支持多个json文件)
+          
+   ##  配置请求接口代理(Vue-cli 3.0 配置方法) 
+          由于 icework 生成的项目 使用的是  Vue-cli 3.0 在项目中 你再也看不到config、build等目录
+          在 vue.config.js 文件中 写入 如下配置
+   ![image](https://github.com/jwfl724168/Vue_Ice_Learning/raw/master/Screenshots/2.png)
+           新版 Vue-cli 3.0 的详细配置说明 请参考 尤大 GitHub [Vue-cli 3.0 配置](https://github.com/vuejs/vue-cli/blob/dev/docs/config.md)
+                 
+       
+ 
   ##  联系我
    ![image](https://github.com/jwfl724168/Vue_Ice_Learning/raw/master/Screenshots/me.png)
         

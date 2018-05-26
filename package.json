@@ -7,7 +7,8 @@
   "scripts": {
     "start": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "mock": "node mock/server.js"
   },
   "dependencies": {
     "@vue-materials/basic-container": "^1.0.0",
@@ -15,7 +16,10 @@
     "normalize.css": "^8.0.0",
     "vue": "^2.5.13",
     "vue-router": "^3.0.1",
-    "vuex": "3.0.1"
+    "vuex": "3.0.1",
+    "axios": "0.17.1",
+    "json-server": "^0.12.1",
+    "underscore": "^1.8.3"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.0.0-beta.6",
