@@ -11,3 +11,17 @@
     import Test from './pages/Test/Test.vue';  // sos 2. 这里加入 新增页面信息
  - 3.routerConfig.js
     { path: '/dashboard/test',layout: HeaderAsideLayout,component: Test,},  // sos 3. 这里加入 新增页面信息
+    
+    
+  ##  引入 Vuex
+    
+    #1. 在 main.js 入口文件中   加入  import store from './store' // 1.sos 引入 vuex 模块
+    
+    #2. 在 main.js 入口文件  new Vue({
+            router,
+            store,  // 2.sos 引入 vuex 模块
+            render: h => h(App),
+        }).$mount('#app');
+    #3. 在 xxx.vue 文件中  即 可以 通过 {{ $store.state.count }} 使用
+        
+

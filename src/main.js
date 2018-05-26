@@ -6,11 +6,14 @@ import './styles/index.scss';
 import App from './App.vue';
 import router from './router';
 
+import store from './store' // 1.sos 引入 vuex 模块
+
 Vue.use(ElementUI);
 
 Vue.config.productionTip = false;
 
 new Vue({
-  router,
-  render: h => h(App),
+    router,
+    store,  // 2.sos 引入 vuex 模块
+    render: h => h(App),
 }).$mount('#app');
