@@ -9,9 +9,11 @@ import NotFound from './pages/NotFound';
 import Vuex from './pages/Vuex/Vuex.vue'; // sos 2. 这里加入 新增页面信息
 import Todolist from './pages/TodoList/TodoList.vue';
 import Login from './pages/Login/Login.vue';
+import ExceptionPages from './pages/ExceptionPages/ExceptionPages.vue';
 
 const routerConfig = [
     { path: '/login',layout: Login,component: Login,},// sos 注意这里加入 login登录页面的 方式！
+    { path: '/exceptionpages',layout: HeaderAsideLayout,component: ExceptionPages,},
   {
     path: '/',layout: HeaderAsideLayout,component: Dashboard,
     children: [

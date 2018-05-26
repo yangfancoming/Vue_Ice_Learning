@@ -6,11 +6,10 @@ const headerMenuConfig = [];
 
 const asideMenuConfig = [
     // { path: '/login',name: '登录页',icon: 'el-icon-date',},
+    { path: '/exceptionpages',name: 'exceptionpages',icon: 'el-icon-menu',},
 
   {
-    path: '/dashboard',
-    name: 'Dashboard',
-    icon: 'el-icon-menu',
+    path: '/dashboard',name: 'Dashboard',icon: 'el-icon-menu',
     children: [
       { path: '/analysis', name: '分析页' },
       { path: '/todolist', name: 'todolist' },
@@ -34,9 +33,7 @@ const asideMenuConfig = [
     ],
   },
   {
-    path: '/charts',
-    name: '图表页',
-    icon: 'el-icon-picture-outline',
+    path: '/charts', name: '图表页',icon: 'el-icon-picture-outline',
     children: [
       { path: '/line', name: '折线图' },
       { path: '/histogram', name: '柱状图' },
@@ -44,19 +41,14 @@ const asideMenuConfig = [
     ],
   },
   {
-    path: '/profile',
-    name: '详情页',
-    icon: 'el-icon-tickets',
+    path: '/profile',name: '详情页',icon: 'el-icon-tickets',
     children: [
       { path: '/success', name: '基础详情页' },
       { path: '/fail', name: '失败' },
     ],
   },
   {
-    path: '/result',
-    name: '结果页',
-    icon: 'el-icon-circle-check-outline',
-    // path: '/exception', name: 'Exception',icon: 'home',
+    path: '/result', name: '结果页',icon: 'el-icon-circle-check-outline',
     children: [
       { path: '/success', name: '成功' },
       { path: '/fail', name: '失败' },
