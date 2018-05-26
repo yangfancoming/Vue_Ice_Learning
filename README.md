@@ -50,6 +50,6 @@
     
 
 
-   ![image](https://github.com/jwfl724168/Vue_Ice_Learning/raw/master/Screenshots/me.jpg)
+   ![image](https://github.com/jwfl724168/Vue_Ice_Learning/raw/master/Screenshots/me.png)
         
 
