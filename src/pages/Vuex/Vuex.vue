@@ -2,9 +2,6 @@
   <div class="Vuex">
       <h1> 全局store的 count 属性：（{{ $store.state.count }}） --------------- 全局store的 show 属性：（{{$store.state.show}}） </h1>
 
-
-
-
       <el-row>
           <el-button type="primary" circle @click="$store.commit('add',10)">+</el-button>   <!-- sos 访问mutations中的方法  带参数 调用的地方不需要显示写出 ，第一参数写的是方法名-->
           <h1>{{ $store.state.count }} ----------{{$store.state.show}} </h1>
