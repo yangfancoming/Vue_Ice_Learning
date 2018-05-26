@@ -1,0 +1,73 @@
+
+cnpm i 后  如果提示：no such file or directory  xxxx \node_modules\node-sass\vendor
+那么请  cnpm install --save-dev node-sass   貌似阿里的一个bug  node-sass 初始化的时候 安装不上
+
+1.menuConfig.js
+   { path: '/test',name: '测试页', },  // sos 1. 这里加入 新增页面信息
+2.routerConfig.js
+    import Test from './pages/Test/Test.vue';  // sos 2. 这里加入 新增页面信息
+   { path: '/dashboard/test',layout: HeaderAsideLayout,component: Test,},  // sos 3. 这里加入 新增页面信息
+
+
+SideBar.vue
+
+
+
+<style lang="scss" scoped>
+.logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 64px;
+  line-height: 64px;
+  background: #002140;
+  color: #fff;
+  text-align: center;
+  font-size: 20px;
+  font-weight: 600;
+  overflow: hidden;
+}
+.site-name {
+  margin-left: 10px;
+}
+.sidebar-container {
+  box-shadow: 2px 0 6px rgba(189, 0, 26, 0.35);
+  transition: width 0.28s;
+  width: 256px !important;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1001;
+  overflow: hidden;
+  a {
+    display: inline-block;
+    width: 100%;
+  }
+  .el-menu {
+    padding-top: 16px;
+    width: 100% !important;
+    border: none;
+  }
+  .el-submenu .el-menu-item {
+    min-width: 256px !important;
+    padding-left: 48px !important;
+    /*background-color: #472a09 !important;*/
+    &:hover {
+      color: #ff252c !important;
+    }
+  }
+  .el-menu-item,
+  .el-submenu .el-menu-item {
+    &.is-active {
+      background-color: #188fff !important;
+      color: #4bff2a !important;
+    }
+  }
+  .el-submenu__title i {
+    font-size: 16px;
+    color: rgba(75, 255, 42, 1);
+  }
+}
+</style>

@@ -6,46 +6,32 @@ import HeaderAsideLayout from './layouts/HeaderAsideLayout';
 import Dashboard from './pages/Dashboard';
 import NotFound from './pages/NotFound';
 
+
+import Vuex from './pages/Vuex/Vuex.vue';  // sos 2. 这里加入 新增页面信息
+
+
 const routerConfig = [
-  {
-    path: '/',
-    layout: HeaderAsideLayout,
-    component: Dashboard,
-    children: [
-      {
-        path: '/dashboard/analysis',
+    {
+        path: '/',
         layout: HeaderAsideLayout,
         component: Dashboard,
-      },
-      {
-        path: '/dashboard/monitor',
+        children: [
+            { path: '/dashboard/analysis',layout: HeaderAsideLayout,component: Dashboard,},
+            // { path: '/dashboard/user',layout: HeaderAsideLayout,component: User,},
+            { path: '/dashboard/Vuex',layout: HeaderAsideLayout,component: Vuex,},  // sos 3. 这里加入 新增页面信息
+            // { path: '/dashboard/monitor', layout: HeaderAsideLayout,component: User, },
+            { path: '/dashboard/workplace', layout: HeaderAsideLayout, component: NotFound,},
+        ],
+    },
+    {
+        path: '/table',
         layout: HeaderAsideLayout,
         component: NotFound,
-      },
-      {
-        path: '/dashboard/workplace',
-        layout: HeaderAsideLayout,
-        component: NotFound,
-      },
-    ],
-  },
-  {
-    path: '/table',
-    layout: HeaderAsideLayout,
-    component: NotFound,
-    children: [
-      {
-        path: '/table/basic',
-        layout: HeaderAsideLayout,
-        component: NotFound,
-      },
-      {
-        path: '/table/fixed',
-        layout: HeaderAsideLayout,
-        component: NotFound,
-      },
-    ],
-  },
+        children: [
+            { path: '/table/basic',layout: HeaderAsideLayout,component: NotFound, },
+            { path: '/table/fixed',layout: HeaderAsideLayout, component: NotFound,},
+        ],
+    },
   {
     path: '/form',
     layout: HeaderAsideLayout,
