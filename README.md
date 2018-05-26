@@ -48,7 +48,8 @@
         }).$mount('#app');
     # 3. 在 xxx.vue 文件中  即 可以 通过 {{ $store.state.count }} 使用
     
-    
-   ![image](https://github.com/jwfl724168/Vue_Ice_Learning/raw/master/Screenshots/微信二维码.jpg)
+
+
+   ![image](https://github.com/jwfl724168/Vue_Ice_Learning/raw/master/Screenshots/me.jpg)
         
 
