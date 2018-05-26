@@ -2,7 +2,7 @@
 
 const dialog_store = {
   state: {
-    show:false, count:2,
+    show:false, count:10,
   },
   mutations: {
     switch_dialog(state){//这里的state对应着上面这个state
