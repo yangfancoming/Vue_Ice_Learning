@@ -6,8 +6,8 @@
  
  
 ## 项目截图
-
-![image](https://github.com/jwfl724168/Vue_Ice_Learning/Screenshots/1.png)
+          (http://github.com/yourname/your-repository/raw/master/images-folder/xxx.png)
+![image](https://github.com/jwfl724168/Vue_Ice_Learning/raw/master/Screenshots/1.png)
 
 
    ##  技术栈: (未完待续)
