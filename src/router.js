@@ -41,7 +41,7 @@ const recursiveRouterConfig = (config = []) => {
     }
     routerMap.push(route);
   });
-
+console.log(routerMap,'11111111');
   return routerMap;
 };
 

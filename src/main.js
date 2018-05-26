@@ -4,7 +4,7 @@ import 'element-ui/lib/theme-chalk/index.css';
 import 'normalize.css/normalize.css';
 import './styles/index.scss';
 import App from './App.vue';
-import router from './router';
+import router from './router.js';
 
 import store from './store' // 1.sos 引入 vuex 模块
 
@@ -17,3 +17,4 @@ new Vue({
     store,  // 2.sos 引入 vuex 模块
     render: h => h(App),
 }).$mount('#app');
+// router.push({ path: '/login' })

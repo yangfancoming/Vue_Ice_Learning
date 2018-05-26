@@ -10,14 +10,9 @@
 
 <script>
 import { NavBar, SideBar, AppMain } from './components';
-
 export default {
   name: 'layout',
-  components: {
-    NavBar,
-    SideBar,
-    AppMain,
-  },
+  components: { NavBar,SideBar,AppMain,},
 };
 </script>
 

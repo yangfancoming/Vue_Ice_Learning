@@ -6,32 +6,30 @@ import HeaderAsideLayout from './layouts/HeaderAsideLayout';
 import Dashboard from './pages/Dashboard';
 import NotFound from './pages/NotFound';
 
-
-import Vuex from './pages/Vuex/Vuex.vue';  // sos 2. 这里加入 新增页面信息
-import Todolist from './pages/TodoList/TodoList.vue';  // sos 2. 这里加入 新增页面信息
-
+import Vuex from './pages/Vuex/Vuex.vue'; // sos 2. 这里加入 新增页面信息
+import Todolist from './pages/TodoList/TodoList.vue';
+import Login from './pages/Login/Login.vue';
 
 const routerConfig = [
-    {
-        path: '/',
-        layout: HeaderAsideLayout,
-        component: Dashboard,
-        children: [
-            { path: '/dashboard/analysis',layout: HeaderAsideLayout,component: Dashboard,},
-            { path: '/dashboard/todolist',layout: HeaderAsideLayout,component: Todolist,},
-            { path: '/dashboard/vuex',layout: HeaderAsideLayout,component: Vuex,},  // sos 3. 这里加入 新增页面信息
-            { path: '/dashboard/workplace', layout: HeaderAsideLayout, component: NotFound,},
-        ],
-    },
-    {
-        path: '/table',
-        layout: HeaderAsideLayout,
-        component: NotFound,
-        children: [
-            { path: '/table/basic',layout: HeaderAsideLayout,component: NotFound, },
-            { path: '/table/fixed',layout: HeaderAsideLayout, component: NotFound,},
-        ],
-    },
+    { path: '/login',layout: Login,component: Login,},// sos 注意这里加入 login登录页面的 方式！
+  {
+    path: '/',layout: HeaderAsideLayout,component: Dashboard,
+    children: [
+      { path: '/dashboard/analysis',layout: HeaderAsideLayout,component: Dashboard, },
+      { path: '/dashboard/todolist',layout: HeaderAsideLayout,component: Todolist,},
+      { path: '/dashboard/vuex', layout: HeaderAsideLayout, component: Vuex }, // sos 3. 这里加入 新增页面信息
+      { path: '/dashboard/workplace',layout: HeaderAsideLayout,component: NotFound,},
+    ],
+  },
+  {
+    path: '/table',
+    layout: HeaderAsideLayout,
+    component: NotFound,
+    children: [
+      { path: '/table/basic', layout: HeaderAsideLayout, component: NotFound },
+      { path: '/table/fixed', layout: HeaderAsideLayout, component: NotFound },
+    ],
+  },
   {
     path: '/form',
     layout: HeaderAsideLayout,
@@ -105,11 +103,9 @@ const routerConfig = [
       },
     ],
   },
-  {
-    path: '*',
-    layout: HeaderAsideLayout,
-    component: NotFound,
-  },
+
+    { path: '*',layout: HeaderAsideLayout,component: NotFound,},// sos  这里是有顺序的  不能放在最前面 否则 点击任何页面都是404
+
 ];
 
 export default routerConfig;
