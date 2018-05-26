@@ -7,7 +7,7 @@
  
 ## 项目截图
           (http://github.com/yourname/your-repository/raw/master/images-folder/xxx.png)
-![image](https://github.com/jwfl724168/Vue_Ice_Learning/raw/master/Screenshots/微信二维码.jpg)
+
 
 
    ##  技术栈: (未完待续)
@@ -47,5 +47,8 @@
             render: h => h(App),
         }).$mount('#app');
     # 3. 在 xxx.vue 文件中  即 可以 通过 {{ $store.state.count }} 使用
+    
+    
+   ![image](https://github.com/jwfl724168/Vue_Ice_Learning/raw/master/Screenshots/微信二维码.jpg)
         
 
