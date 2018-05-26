@@ -8,6 +8,7 @@ import NotFound from './pages/NotFound';
 
 
 import Vuex from './pages/Vuex/Vuex.vue';  // sos 2. 这里加入 新增页面信息
+import Todolist from './pages/TodoList/TodoList.vue';  // sos 2. 这里加入 新增页面信息
 
 
 const routerConfig = [
@@ -17,9 +18,8 @@ const routerConfig = [
         component: Dashboard,
         children: [
             { path: '/dashboard/analysis',layout: HeaderAsideLayout,component: Dashboard,},
-            // { path: '/dashboard/user',layout: HeaderAsideLayout,component: User,},
-            { path: '/dashboard/Vuex',layout: HeaderAsideLayout,component: Vuex,},  // sos 3. 这里加入 新增页面信息
-            // { path: '/dashboard/monitor', layout: HeaderAsideLayout,component: User, },
+            { path: '/dashboard/todolist',layout: HeaderAsideLayout,component: Todolist,},
+            { path: '/dashboard/vuex',layout: HeaderAsideLayout,component: Vuex,},  // sos 3. 这里加入 新增页面信息
             { path: '/dashboard/workplace', layout: HeaderAsideLayout, component: NotFound,},
         ],
     },
