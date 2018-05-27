@@ -18,7 +18,8 @@ AutoCAD Excel Word 等办公软件的二次开发等等。
  
 ## 项目截图
           (http://github.com/yourname/your-repository/raw/master/images-folder/xxx.png)
-
+   ![image](https://github.com/yangfancoming/Vue_Ice_Learning/raw/master/Screenshots/all1.png)
+   ![image](https://github.com/yangfancoming/Vue_Ice_Learning/raw/master/Screenshots/all_add.png)
 
    ##  技术栈: (未完待续)
        # 前端：vue.js 2.5 + element-UI + jsonserver + mock.js
