@@ -56,8 +56,14 @@
    ##  配置请求接口代理(Vue-cli 3.0 配置方法) 
           由于 icework 生成的项目 使用的是  Vue-cli 3.0 在项目中 你再也看不到config、build等目录
           在 vue.config.js 文件中 写入 如下配置
+          
    ![image](https://github.com/yangfancoming/Vue_Ice_Learning/raw/master/Screenshots/2.png)
-           新版 Vue-cli 3.0 的详细配置说明 请参考 尤大 GitHub [Vue-cli 3.0 配置](https://github.com/vuejs/vue-cli/blob/dev/docs/config.md)
+   
+   ```
+  #新版 Vue-cli 3.0 的详细配置说明 请参考 尤大 GitHub 
+   ```
+   [Vue-cli 3.0 配置](https://github.com/vuejs/vue-cli/blob/dev/docs/config.md)   
+   
                  
        
  
