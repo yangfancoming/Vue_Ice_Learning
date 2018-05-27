@@ -13,8 +13,8 @@
                   <el-input  placeholder="请输入姓名" v-model="listQuery._name"></el-input>
               </el-form-item>
 
-              <el-form-item  prop="_doe" label="创建日期" >
-                  <el-date-picker v-model="listQuery._createtime" type="date" placeholder="选择日期" :editable=false value-format="yyyy-MM-dd"> </el-date-picker>
+              <el-form-item  prop="_dob" label="出生日期" >
+                  <el-date-picker v-model="listQuery._dob" type="date" placeholder="选择日期" :editable=false value-format="yyyy-MM-dd"> </el-date-picker>
               </el-form-item>
           </div>
 
@@ -48,7 +48,7 @@
           <el-table-column type="selection" width="55" align="center"> </el-table-column>
           <el-table-column prop="id" label="编号" align="center"> </el-table-column>
           <el-table-column prop="_username" label="账号" align="center"> </el-table-column>
-          <el-table-column prop="_name" label="用户名" align="center"> </el-table-column>
+          <el-table-column prop="_name" label="姓名" align="center"> </el-table-column>
           <el-table-column prop="_sid" label="工号" align="center" sortable show-overflow-tooltip> </el-table-column>
 
           <el-table-column prop="scope.row._sex" align="center" label="性别" >  <!-- sos 请记住 这里的 状态回显-->
@@ -85,7 +85,7 @@
         components:{ User_add } ,// 注册局部组件
         data() {
             return {
-                listQuery: { _createtime:'',_name:'',_username:'',pageNum: 1,pageSize: 10,total: null,sort: '+id'},
+                listQuery: { _dob:'',_name:'',_username:'',pageNum: 1,pageSize: 10,total: null,sort: '+id'},
                 loading:false,
                 tableData: null,
                 multipleSelection: [], // 存储 选中记录的集合
@@ -97,7 +97,7 @@
         methods:{
 
             resetForm (formName) {
-//          this.$refs.listQuery.resetFields();// shit 或者这种方法 不带参数也可以
+//               this.$refs.listQuery.resetFields();// shit 或者这种方法 不带参数也可以
                 this.$refs[formName].resetFields();
             },
             getuser(){

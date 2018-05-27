@@ -3,7 +3,7 @@
 const dialog_store = {
     state: { show:false, count:10, },
 
-    getters:{ show_state: state => state.show, } ,   // state的计算属性
+    getters:{ show_state1: state => state.show, } ,   // state的计算属性
 
     mutations: {
         switch_dialog(state){//这里的state对应着上面这个state

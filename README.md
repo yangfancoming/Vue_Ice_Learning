@@ -26,9 +26,10 @@ AutoCAD Excel Word 等办公软件的二次开发等等。
          1.采用 Vue-Video-Player 视频播放插件
          2.采用 audio 音频播放插件
          3.采用 谷歌 guava Java核心库
+         3.采用 vee-validate 对前台表单数据 进行校检
        # 后端：springboot + Mybatis + SpringSecurity
          1.采用 easypoi 插件 对表格进行导入导出 
-         2.采用 Hibernate Validator 插件 对数据进行校检
+         2.采用 Hibernate Validator 插件 对Excel导入数据 进行校检
          3.采用 Mybatis 分页插件 PageHelper
 
 
@@ -63,9 +64,16 @@ AutoCAD Excel Word 等办公软件的二次开发等等。
     # 1. cnpm install --save moment
     # 2. 在 main.js 文件中  import moment from "moment"; Vue.prototype.$moment = moment 在vue原型上进行挂载
     # 3. 在 xxx.vue 文件中  通过 this.$moment 方式 使用 eg: this.$moment(date).format("YYYY-MM-DD");
-    
+  ##  引入 vee_validate 插件
+    # 1.在main.js文件中  加入 import './veevalidate/Validate'
+    # 2. 在对应路径下 加入 Validate.js 文件  文件内容 参考源码
+    # 3. 这里有一个大坑，由于   vee_validate 版本更新  网络上很多方法 不再适用  新版本的 需要额外引入vue-i18n  具体方法 请百度
   ##  引入 axios 
-    # 引入方法 和 moment插件 一模一样 不再赘述，可以参见 项目中源码               
+    # 引入方法 和 moment插件 一模一样 不再赘述，可以参见 项目中源码   
+  ##  引入 vee-validate 
+     cnpm install vee-validate --save 
+     cnpm install vue-i18n
+     # 引入方法 和 moment插件 一模一样 不再赘述，可以参见 项目中源码               
 
   ##  引入 mock数据  json-server
           1.引入两个依赖： "json-server": "^0.12.1",  "underscore": "^1.8.3"
