@@ -65,15 +65,16 @@ AutoCAD Excel Word 等办公软件的二次开发等等。
     # 2. 在 main.js 文件中  import moment from "moment"; Vue.prototype.$moment = moment 在vue原型上进行挂载
     # 3. 在 xxx.vue 文件中  通过 this.$moment 方式 使用 eg: this.$moment(date).format("YYYY-MM-DD");
   ##  引入 vee_validate 插件
-    # 1.在main.js文件中  加入 import './veevalidate/Validate'
-    # 2. 在对应路径下 加入 Validate.js 文件  文件内容 参考源码
-    # 3. 这里有一个大坑，由于   vee_validate 版本更新  网络上很多方法 不再适用  新版本的 需要额外引入vue-i18n  具体方法 请百度
+    # 1. 安装vee_validate 插件  cnpm install vee-validate --save
+    # 2.在main.js文件中  加入 import './veevalidate/Validate' 
+    # 3. 在对应路径下 加入 Validate.js 文件  文件内容 参考源码
+    # 4. 这里有一个大坑，由于   vee_validate 版本更新  网络上很多方法 不再适用  新版本的 需要额外引入vue-i18n  
+    # 5. cnpm install vue-i18n
   ##  引入 axios 
     # 引入方法 和 moment插件 一模一样 不再赘述，可以参见 项目中源码   
   ##  引入 vee-validate 
-     cnpm install vee-validate --save 
-     cnpm install vue-i18n
-     # 引入方法 和 moment插件 一模一样 不再赘述，可以参见 项目中源码               
+      
+            
 
   ##  引入 mock数据  json-server
           1.引入两个依赖： "json-server": "^0.12.1",  "underscore": "^1.8.3"
