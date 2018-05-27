@@ -82,7 +82,7 @@
 <script>
     import User_add from './User_add.vue';
     export default {
-        components:{User_add} ,// 注册局部组件
+        components:{ User_add } ,// 注册局部组件
         data() {
             return {
                 listQuery: { _createtime:'',_name:'',_username:'',pageNum: 1,pageSize: 10,total: null,sort: '+id'},
