@@ -84,11 +84,15 @@ AutoCAD Excel Word 等办公软件的二次开发等等。
    ```
   ##  封装很多页面 都要用到的 新增弹框和编辑弹框 将其拆分成组件的形式  然后使用:vuex统一管理 弹框的显示和隐藏
     # 1. list页面的新增按钮加入 @click="$store.state.dialog_store.show=true"   表示显示 新增弹框
-    # 2. add 对话框页面 中 加入 :visible.sync="$store.state.dialog_store.show" 绑定 store中dialog_store模块中的显示状态 来控制弹框的显示
-    # 3. add 对话框页面 中  确定和取消按钮中 加入   @click="$store.state.dialog_store.show=false" 来控制弹框的隐藏
-    # 4. add 对话框页面 中  右上角关闭按钮中  加入  @click="$store.state.dialog_store.show=false" 来控制弹框的隐藏
+    # 2. add 对话框页面 中  确定和取消按钮中 加入   @click="$store.state.dialog_store.show=false" 来控制弹框的隐藏
+    # 3. add 对话框页面 中  右上角关闭按钮中  加入  @click="$store.state.dialog_store.show=false" 来控制弹框的隐藏
+    # 4. add 对话框页面 中 加入 :visible.sync="show_state" 绑定 store 中dialog_store模块中的显示状态 来控制弹框的显示
+          使用 mapGetters 来获取 dialog_store 中的show属性   
+          import { mapGetters } from 'vuex' 
+          computed: mapGetters([ 'show_state' ]), 为此属性 添加 watch 监视弹框的 显示和隐藏动作
+          显示：  清空新增框 中的所有内容 防止记录上次内容
+          隐藏：  隐藏新增框 时 清除校检信息 防止记录上次的校检信息
 
- 
   ##  联系我
    ![image](https://github.com/yangfancoming/Vue_Ice_Learning/raw/master/Screenshots/me.png)
         

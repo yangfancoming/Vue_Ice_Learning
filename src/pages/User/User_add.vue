@@ -3,18 +3,17 @@
   <!--shit  1. ref="ruleForm" 中的 'ruleForm' 需要当String 传入 提交表单函数 -->
   <!--shit  2. prop="_name"  中的 '_name'的命名必须与 v-model="new_student._name" 中的 _name 名称相同 -->
   <!--shit  3. el-dialog  中的:before-close 为右上角关闭按钮事件 -->
-  <el-dialog title="新增" width="50%"   center  :visible.sync="$store.state.dialog_store.show" :before-close="beforeClose">
-    <el-form  :model="new_student"  ref="ruleForm" :rules="rules111" class="demo-form-inline" >
-
+  <el-dialog title="新增" width="50%"   center   :visible.sync="show_state" :before-close="beforeClose">   <!-- sos 这里不能使用 this.$store.state.dialog_store.show=true; 因为计算属性 需要 引入mapGetters 写成单变量形式 show_state -->
+    <el-form  :model="user"  ref="ruleForm" :rules="rules111" class="demo-form-inline" >
       <el-row>
         <el-col :span="12">
           <el-form-item prop="_name" label="账号" :label-width="formLabelWidth">
-            <el-input v-model="new_student._username"  placeholder="请输入 账号"></el-input>
+            <el-input v-model="user._username"  placeholder="请输入 账号"></el-input>
           </el-form-item>
         </el-col>
           <el-col :span="12">
               <el-form-item prop="_name" label="姓名" :label-width="formLabelWidth">
-                  <el-input v-model="new_student._name"  placeholder="请输入 姓名"></el-input>
+                  <el-input v-model="user._name"  placeholder="请输入 姓名"></el-input>
               </el-form-item>
           </el-col>
       </el-row>
@@ -22,12 +21,12 @@
       <el-row>
         <el-col :span="12">
           <el-form-item prop="_sid" label="工号" :label-width="formLabelWidth">
-            <el-input v-model="new_student._sid"   placeholder="请输入 工号"></el-input>
+            <el-input v-model="user._sid"   placeholder="请输入 工号"></el-input>
           </el-form-item>
         </el-col>
           <el-col :span="12">
               <el-form-item prop="_sex"  label=" 性别" :label-width="formLabelWidth">
-                  <el-select  align="center"  v-model="new_student._sex"  placeholder="请选择 性别"> <!--style="width: 185px;" -->
+                  <el-select  align="center"  v-model="user._sex"  placeholder="请选择 性别"> <!--style="width: 185px;" -->
                       <el-option align="center" label="男" value="1"></el-option>
                       <el-option align="center"  label="女" value="0"></el-option>
                   </el-select>
@@ -39,18 +38,18 @@
       <el-row>
           <el-col :span="12"> <!-- fuck value-format="yyyy-MM-dd"  日期选择器 需要 这样进行时间格式化！-->
               <el-form-item  prop="_doe" label="出生日期" :label-width="formLabelWidth" >
-                  <el-date-picker v-model="new_student._doe" type="date" placeholder="选择日期" :editable=false value-format="yyyy-MM-dd" > </el-date-picker>
+                  <el-date-picker v-model="user._doe" type="date" placeholder="选择日期" :editable=false value-format="yyyy-MM-dd" > </el-date-picker>
               </el-form-item>
           </el-col>
         <el-col :span="12">
           <el-form-item label="是否启用" :label-width="formLabelWidth" align="center" >
-            <el-switch v-model="new_student._isenable" inactive-text="禁用" active-text="启用" active-color="#13ce66" >  </el-switch>
+            <el-switch v-model="user._isenable" inactive-text="禁用" active-text="启用" active-color="#13ce66" >  </el-switch>
           </el-form-item>
         </el-col>
       </el-row>
 
       <el-form-item prop="_mark" label="备注信息" :label-width="formLabelWidth">
-        <el-input v-model="new_student._mark" type="textarea" :autosize="{ minRows: 2, maxRows: 4}" placeholder="最多输入10个字哦~" maxlength="10">    </el-input>
+        <el-input v-model="user._mark" type="textarea" :autosize="{ minRows: 2, maxRows: 4}" placeholder="最多输入10个字哦~" maxlength="10">    </el-input>
       </el-form-item>
     </el-form>
 
@@ -64,7 +63,10 @@
 <script>
 //  import { validateMobile } from '@/utils/validate';
 //  import {httpUrl} from '../../utils/http_url';
+import { mapGetters } from 'vuex'
   export default {
+      computed: mapGetters([ 'show_state' ]),
+
     data() {
 //      const Myvalidate = (rule, value, callback) => {
 //        if (!validateMobile(value)) {
@@ -73,11 +75,11 @@
 //      }
       return {
         sex:'',
-        new_student:{      // sos 这里的 对象名 不能与 edit组件中的  对象名 相同  否则 点击编辑后  再点击新增 会记录回显的信息
+          user:{      // sos 这里的 对象名 不能与 edit组件中的  对象名 相同  否则 点击编辑后  再点击新增 会记录回显的信息
           _isenable:true, //  启用/禁用状态 需要在这里初始化默认值  否则 新增的时候 会默认为空 而不是 true/false
         },
-        formLabelWidth: '80px',
-        localShow: this.dialog_show,
+//          show: this.$store.state.dialog_store.show,
+          formLabelWidth: '80px',
         rules111: {
           _name: [
             { required: true, message: '请输入 姓名', trigger: 'blur' }, //为空时 提示信息
@@ -96,31 +98,17 @@
           ],
 //          _tel: [
 //            { required: true,  trigger: 'blur',validator: Myvalidate  }], // sos  这里指定了 自定义验证 所以不能 使用message: '请选择日期' 属性 否则回调显示的验证信息就无法显示
-//          _school: [
-//            { required: true, message: '请输入 就读学校', trigger: 'blur' }, //
-//            { min: 2, max: 20, message: '长度在 2 到 20 个字符', trigger: 'blur' } ],  //
-//          _doe: [
-//            { type: 'date', required: true, message: '请选择日期', trigger: 'change' }],
-//          _account: [
-//            { required: true, message: '请输入 登录账号', trigger: 'blur' }, //
-//            { min: 4, max: 10, message: '长度在 4 到 10 个字符', trigger: 'blur' } ],  //
-//          _mark: [
-//            { required: true, message: '请输入 备注', trigger: 'blur' }, //
-//            { min: 4, max: 10, message: '长度在 4 到 10 个字符', trigger: 'blur' } ],  //
         },
-//      { required: true, message: '年龄不能为空'}, _tel
-//      { type: 'number', message: '年龄必须为数字值'} _account
       }
 
     },
 
     watch: {
-      dialog_show(val) {
-          console.log(val,'3444444')
-        if(val){this.new_student = {} }// 监视 新增框弹出  如果弹出则 清空弹出框中的所有内容 防止记录上次内容
-        else {this.cancelFieldValidate('ruleForm')} // 监视 关闭新增框 时 清除校检信息 防止记录上次的校检信息
-          this.localShow = val
-      }
+        show_state: function (newQuestion, oldQuestion) {
+            console.log(newQuestion,oldQuestion);
+            if(newQuestion){this.new_student = {} }// 监视 新增框弹出  如果弹出则 清空弹出框中的所有内容 防止记录上次内容
+            else {this.cancelFieldValidate('ruleForm')} // 监视 关闭新增框 时 清除校检信息 防止记录上次的校检信息
+        },
     },
 
     methods: {
@@ -156,7 +144,6 @@
           } else {
 //            console.log('error submit!!');
           }
-
             this.$store.state.dialog_store.show=false;
         });
 

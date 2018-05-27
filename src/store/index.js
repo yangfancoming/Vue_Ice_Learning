@@ -7,7 +7,7 @@ import dialog_store from './modules/dialog_store'
 
 Vue.use(Vuex)
 
-const store1 = new Vuex.Store({
+const store = new Vuex.Store({
 
   state:{ show:false, count:5, }, // 存放状态
   // getters ,// state的计算属性
@@ -23,8 +23,7 @@ const store1 = new Vuex.Store({
   // modules: { app , user ,dialog_store},
   modules: { dialog_store },
 })
-
-export default store1
+export default store
 /**
 
  sos 如果将store分成一个个的模块的话，则需要用到modules。然后在每一个module中写state, getters, mutations, actions等。

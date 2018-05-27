@@ -95,6 +95,7 @@
             this.getuser();
         },
         methods:{
+
             resetForm (formName) {
 //          this.$refs.listQuery.resetFields();// shit 或者这种方法 不带参数也可以
                 this.$refs[formName].resetFields();
