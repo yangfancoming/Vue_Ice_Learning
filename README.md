@@ -84,11 +84,17 @@ AutoCAD Excel Word 等办公软件的二次开发等等。
   #新版 Vue-cli 3.0 的详细配置说明 请参考 尤大 GitHub  [Vue-cli 3.0 配置](https://github.com/vuejs/vue-cli/blob/dev/docs/config.md)
    ```
   ##  使用 谷歌的 postman 测试api请求接口 
-        get请求：
-   ![image](https://github.com/yangfancoming/Vue_Ice_Learning/raw/master/Screenshots/get.png)
+        get 请求：
+   ![image](https://github.com/yangfancoming/Vue_Ice_Learning/raw/master/Screenshots/all_get.png)
    
-        post请求：
-   ![image](https://github.com/yangfancoming/Vue_Ice_Learning/raw/master/Screenshots/post.png)   
+        post 请求：
+   ![image](https://github.com/yangfancoming/Vue_Ice_Learning/raw/master/Screenshots/all_post.png)   
+   
+         patch 请求：
+   ![image](https://github.com/yangfancoming/Vue_Ice_Learning/raw/master/Screenshots/all_patch.png)      
+   
+         delete 请求：
+   ![image](https://github.com/yangfancoming/Vue_Ice_Learning/raw/master/Screenshots/all_delete.png)   
   ##  封装很多页面 都要用到的 新增弹框和编辑弹框 将其拆分成组件的形式  然后使用:vuex统一管理 弹框的显示和隐藏
     # 1. list页面的新增按钮加入 @click="$store.state.dialog_store.show=true"   表示显示 新增弹框
     # 2. add 对话框页面 中  确定和取消按钮中 加入   @click="$store.state.dialog_store.show=false" 来控制弹框的隐藏
