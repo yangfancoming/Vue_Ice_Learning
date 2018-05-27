@@ -10,7 +10,7 @@ AutoCAD Excel Word 等办公软件的二次开发等等。
 因为我也是新手，文档和项目中 如果不合理或错误的地方 希望大神不吝指教，万分感谢！
 
 > 该项目使用阿里的 icework模板生成工具 从 0 到 1 开始搭建项目，内置基础的页面，路由和菜单展示。
-   并详细讲解 各个插件也自定义页面的引入和使用。以便学习vue的小伙伴能够快速的搭建 vue 后台管理系统。
+   并详细讲解 各个插件和自定义页面的引入和使用。以便学习vue的小伙伴能够快速的搭建 vue 后台管理系统。
 
 > cnpm i 后  如果提示：no such file or directory  xxxx \node_modules\node-sass\vendor
  那么请  cnpm install --save-dev node-sass   貌似阿里的一个bug  node-sass 初始化的时候 安装不上
@@ -80,13 +80,14 @@ AutoCAD Excel Word 等办公软件的二次开发等等。
    ![image](https://github.com/yangfancoming/Vue_Ice_Learning/raw/master/Screenshots/2.png)
    
    ```
-  #新版 Vue-cli 3.0 的详细配置说明 请参考 尤大 GitHub 
+  #新版 Vue-cli 3.0 的详细配置说明 请参考 尤大 GitHub  [Vue-cli 3.0 配置](https://github.com/vuejs/vue-cli/blob/dev/docs/config.md)
    ```
-   [Vue-cli 3.0 配置](https://github.com/vuejs/vue-cli/blob/dev/docs/config.md)   
-   
-   
+  ##  封装很多页面 都要用到的 新增弹框和编辑弹框 将其拆分成组件的形式  然后使用:vuex统一管理 弹框的显示和隐藏
+    # 1. list页面的新增按钮加入 @click="$store.state.dialog_store.show=true"   表示显示 新增弹框
+    # 2. add 对话框页面 中 加入 :visible.sync="$store.state.dialog_store.show" 绑定 store中dialog_store模块中的显示状态 来控制弹框的显示
+    # 3. add 对话框页面 中  确定和取消按钮中 加入   @click="$store.state.dialog_store.show=false" 来控制弹框的隐藏
+    # 4. add 对话框页面 中  右上角关闭按钮中  加入  @click="$store.state.dialog_store.show=false" 来控制弹框的隐藏
 
-       
  
   ##  联系我
    ![image](https://github.com/yangfancoming/Vue_Ice_Learning/raw/master/Screenshots/me.png)

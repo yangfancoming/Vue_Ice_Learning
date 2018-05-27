@@ -14,7 +14,7 @@
           <el-button type="success"  @click="$store.commit('reduce',5)">mutations 减少</el-button>
       </el-row>
 
-      <h1> 全局 switch_dialo 的 count 属性：（{{ $store.state.dialog_store.count }}） ---------------  show 属性：（{{$store.state.dialog_store.show}}） </h1>
+      <h1> 全局 switch_dialo 的 count 属性：（{{ $store.state.dialog_store.count }}） ---------------  show 属性：（{{ $store.state.dialog_store.show }}） </h1>
       <el-row>
           <el-button type="primary" round @click="$store.state.dialog_store.show = true">直接改变show属性</el-button>
           <el-button type="warning" round @click="$store.commit('switch_dialog')">commit改变show属性</el-button>     <!--使用 $store.commit('switch_dialog') 来触发 mutations 中的 switch_dialog 方法。-->

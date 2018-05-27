@@ -12,7 +12,7 @@ const asideMenuConfig = [
     path: '/dashboard',name: 'Dashboard',icon: 'el-icon-menu',
     children: [
       { path: '/analysis', name: '分析页' },
-      { path: '/todolist', name: 'todolist' },
+      { path: '/user', name: '用户管理' },
       { path: '/vuex', name: 'vuex' }, // sos 1. 这里加入 新增页面信息
       { path: '/monitor', name: '监控页' },
       { path: '/workplace', name: '工作台' },

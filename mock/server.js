@@ -5,21 +5,13 @@
  这样 就能在项目启动 时候 加载 server.js 文件
  *
  * */
-
 const jsonServer = require('json-server')
 const server = jsonServer.create()
-
 // Support middleware
 const middleware = jsonServer.defaults()
 server.use(middleware)
-
 // Add this before server.use(router) 注意：rewriter 的设置一定要在 router 设置之前
-server.use(jsonServer.rewriter({
-  // '/projects/:id/environments/:env_id/configs': '/environments/:env_id/configs',
-  // '/projects/:id/environments/:env_id/latest_git_log': '/environments/:env_id/latest_git_log',
-  // '/dashboard/weekly_data': '/weekly_data'
-  // '/geta_prov': '/a_prov'
-}))
+server.use(jsonServer.rewriter({}))
 
 // 支持加载多个db文件
 const _ = require('underscore')
@@ -32,7 +24,6 @@ files.forEach((file) => {
   _.extend(base, require(path.resolve(mockDir, file)))
 })
 const router = jsonServer.router(base)
-
 
 
 server.use(router)
