@@ -85,6 +85,7 @@ AutoCAD Excel Word 等办公软件的二次开发等等。
   ##  使用 谷歌的 postman 测试api请求接口 
         get请求：
    ![image](https://github.com/yangfancoming/Vue_Ice_Learning/raw/master/Screenshots/get.png)
+   
         post请求：
    ![image](https://github.com/yangfancoming/Vue_Ice_Learning/raw/master/Screenshots/post.png)   
   ##  封装很多页面 都要用到的 新增弹框和编辑弹框 将其拆分成组件的形式  然后使用:vuex统一管理 弹框的显示和隐藏
