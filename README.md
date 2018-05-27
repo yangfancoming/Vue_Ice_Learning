@@ -65,6 +65,7 @@ AutoCAD Excel Word 等办公软件的二次开发等等。
     # 3. 在对应路径下 加入 Validate.js 文件  文件内容 参考源码
     # 4. 这里有一个大坑，由于   vee_validate 版本更新  网络上很多方法 不再适用  新版本的 需要额外引入 vue-i18n  
     # 5. cnpm install vue-i18n
+    # 5. 如果您的项目同时还引入了 elementui 的话  那么会引起冲突 vee_validate插件和 elementui 使用的计算属性 有个 fileds 同名字段导致的 解决方法 参考一下截图和源码
    ![image](https://github.com/yangfancoming/Vue_Ice_Learning/raw/master/Screenshots/validate1.png)    
    ![image](https://github.com/yangfancoming/Vue_Ice_Learning/raw/master/Screenshots/validate2.png)    
   ##  引入 moment 插件
