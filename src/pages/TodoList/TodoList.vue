@@ -2,14 +2,14 @@
   <div class="todoList">
       <!-- fuck 表格中  某一列内容过长 想要省略号和 鼠标提示详细信息  需要设置  ①el-table标签中需要添加tooltip-effect="dark"属性  ②el-table-column标签中需要添加show-overflow-tooltip属性-->
       <el-table ref="multipleTable" tooltip-effect="dark" :data="tableData"  @selection-change="handleSelectionChange" @row-click="rowclick"  highlight-current-row  fit border  size="mini"  style="width: 100%" max-height="700"
-                v-loading="loading"
-                element-loading-text="拼命加载中"
-                element-loading-spinner="el-icon-loading"
-                element-loading-background="rgba(0, 0, 0, 0.8)">
-          <!--<el-table-column prop="id" label="编号" align="center"> </el-table-column>-->
+                v-loading="loading" element-loading-text="拼命加载中" element-loading-spinner="el-icon-loading"  element-loading-background="rgba(0, 0, 0, 0.8)">
+
           <el-table-column type="selection" width="55" align="center"> </el-table-column>
+          <el-table-column prop="id" label="编号" align="center"> </el-table-column>
+          <el-table-column prop="_username" label="账号" align="center"> </el-table-column>
           <el-table-column prop="_name" label="用户名" align="center"> </el-table-column>
           <el-table-column prop="_sid" label="工号" align="center" sortable show-overflow-tooltip> </el-table-column>
+
 
           <el-table-column prop="scope.row._sex" align="center" label="性别" >  <!-- sos 请记住 这里的 状态回显-->
               <template slot-scope="scope">
@@ -17,8 +17,7 @@
               </template>
           </el-table-column>
 
-          <el-table-column prop="_doe" label="出生日期"  align="center" :formatter="dateFormat"> </el-table-column> <!--Date of Enrollment    -->
-          <el-table-column prop="_createtime" label="创建时间" align="center" :formatter="dateFormat" > </el-table-column>
+          <el-table-column prop="_dob" label="出生日期"  align="center" :formatter="dateFormat"> </el-table-column> <!--Date of Enrollment    -->
           <el-table-column prop="scope.row._isenable" label="是否启用" align="center">
               <template slot-scope="scope">
                   <div slot="reference" class="name-wrapper">
@@ -27,7 +26,7 @@
                   </div>
               </template>
           </el-table-column>
-          <el-table-column prop="_mark" label="备注" align="center" show-overflow-tooltip> </el-table-column>
+          <el-table-column prop="_remark" label="备注" align="center" show-overflow-tooltip> </el-table-column>
 
           <el-table-column label="操作" align="center" fixed="right" width="200">     <!--align="center" 列内容居中显示 -->
               <template slot-scope="scope">
@@ -37,20 +36,10 @@
           </el-table-column>
       </el-table>
 
-
-      <el-row>
-          <el-button>默认按钮</el-button>
-          <el-button type="primary" v-on:click="testAxios">主要按钮</el-button>
-          <el-button type="success">成功按钮</el-button>
-          <el-button type="info">信息按钮</el-button>
-          <el-button type="warning">警告按钮</el-button>
-          <el-button type="danger">危险按钮</el-button>
-      </el-row>
   </div>
 
 </template>
 <script>
-
     export default {
         data() {
             return {
@@ -59,18 +48,20 @@
                 multipleSelection: [], // 存储 选中记录的集合
             }
         },
+        created(){
+            this.getuser();
+        },
         methods:{
-            testAxios(){
-                this.$axios.get('api/users').then(  // sos 全局引用 方法 在main.js中 加入import axios from 'axios' 和 Vue.prototype.$ajax = axios
-                    (res) => { this.list = res.data;},
-                    (err)=>  { console.log(err,'请求失败');
-                    });
+            getuser(){
+                this.$axios.get('api/sys_user').then(  // sos 全局引用 方法 在main.js中 加入import axios from 'axios' 和 Vue.prototype.$ajax = axios
+                    (res) => { console.log(res.data,'请求失败');this.tableData = res.data;},
+                    (err)=>  { console.log(err,'请求失败');});
             },
             dateFormat:function(row, column) {  //时间格式化
                 var date = row[column.property];
-                if (date == undefined) {  return "";}
-//        return moment(date).format("YYYY-MM-DD HH:mm:ss");// sos 注意 这种js引入的方法！ 就相当于组件进行引入的
-//        return moment(date).format("YYYY-MM-DD");//
+                console.log(date,'11111111111111');
+                if (date === undefined) {  return "";}
+                return this.$moment(date).format("YYYY-MM-DD");//  "YYYY-MM-DD HH:mm:ss" sos 注意 这种js引入的方法！ 就相当于组件进行引入的
             },
             rowclick(row, event, column){this.$refs.multipleTable.toggleRowSelection(row);},
             handleSelectionChange(val) { console.info(val); this.multipleSelection = val;}, //更新 表格中每次选中/取消选中的  集合变化

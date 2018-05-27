@@ -46,6 +46,15 @@
             render: h => h(App),
         }).$mount('#app');
     # 3. 在 xxx.vue 文件中  即 可以 通过 {{ $store.state.count }} 使用
+    
+  ##  引入 moment 插件
+    # 1. cnpm install --save moment
+    # 2. 在 main.js 文件中  import moment from "moment"; Vue.prototype.$moment = moment 在vue原型上进行挂载
+    # 3. 在 xxx.vue 文件中  通过 this.$moment 方式 使用 eg: this.$moment(date).format("YYYY-MM-DD");
+    
+  ##  引入 axios 
+    # 引入方法 和 moment插件 一模一样 不再赘述，可以参见 项目中源码               
+
   ##  引入 mock数据  json-server
           1.引入两个依赖： "json-server": "^0.12.1",  "underscore": "^1.8.3"
           2.建立mock文件夹 其内容 参考 项目中的 json文件 和 server.js文件
@@ -64,7 +73,8 @@
    ```
    [Vue-cli 3.0 配置](https://github.com/vuejs/vue-cli/blob/dev/docs/config.md)   
    
-                 
+   
+
        
  
   ##  联系我
