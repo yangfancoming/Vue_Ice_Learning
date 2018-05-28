@@ -1,9 +1,17 @@
 
 
 const dialog_store = {
-    state: { show:false, count:10, },
+    state: {
+        add_show:false,
+        edit_show:false,
+        count:10,
+        edit_model:{},  },
 
-    getters:{ show_state1: state => state.show, } ,   // state的计算属性
+    getters:{
+        add_show: state => state.add_show,
+        edit_show: state => state.edit_show,
+        edit_model: state => state.edit_model,
+    } ,   // state的计算属性
 
     mutations: {
         switch_dialog(state){//这里的state对应着上面这个state

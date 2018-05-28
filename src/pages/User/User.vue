@@ -1,6 +1,7 @@
 <template>
   <div class="app-container">
-      <User_add></User_add>
+      <User_add @addSaveTodo="addSaveTodo"></User_add>
+      <User_edit @addSaveTodo="addSaveTodo"></User_edit>
       <!-- fuck 切记： el-form 中 必须要有 :model="" ref=""  两者的内容必须相同 -->
       <!-- fuck 切记： 在每个要想被清除内容的el-form-item 组件上必须写prop="" -->
       <!-- fuck 切记： prop 绑定的是:data数组中每一个元素对应的值 -->
@@ -20,9 +21,9 @@
 
           <div align="center" >
               <el-form-item>
-                  <el-button type="warning" icon="el-icon-circle-plus-outline" @click="$store.state.dialog_store.show=true" >新增</el-button>
+                  <el-button type="warning" icon="el-icon-circle-plus-outline" @click="$store.state.dialog_store.add_show=true" >新增</el-button>
                   <el-button type="primary" icon="el-icon-search" >查询</el-button>  <!--@click="queryList"-->
-                  <el-button type="danger" icon="el-icon-delete"  :disabled="this.multipleSelection.length === 0">批量删除</el-button>   <!--v-on:click="batchDelete"-->
+                  <el-button type="danger" icon="el-icon-delete" v-on:click="batchDelete" :disabled="this.multipleSelection.length === 0">批量删除</el-button>
               </el-form-item>
 
               <!--<el-form-item >-->
@@ -36,7 +37,7 @@
               <!--</el-form-item>-->
 
               <el-form-item >
-                  <el-button @click="resetForm('listQuery')">重置</el-button>
+                  <el-button  type="info" @click="resetForm('listQuery')">重置</el-button>
               </el-form-item>
           </div>
       </el-form>
@@ -81,10 +82,12 @@
 </template>
 <script>
     import User_add from './User_add.vue';
+    import User_edit from './User_edit.vue';
     export default {
-        components:{ User_add } ,// 注册局部组件
+        components:{ User_add,User_edit } ,// 注册局部组件
         data() {
             return {
+//                user:{},
                 listQuery: { _dob:'',_name:'',_username:'',pageNum: 1,pageSize: 10,total: null,sort: '+id'},
                 loading:false,
                 tableData: null,
@@ -110,21 +113,31 @@
                 return this.$moment(date).format("YYYY-MM-DD");//  "YYYY-MM-DD HH:mm:ss" sos 注意 这种js引入的方法！ 就相当于组件进行引入的
             },
             rowclick(row, event, column){this.$refs.multipleTable.toggleRowSelection(row);},
-            handleSelectionChange(val) { console.info(val); this.multipleSelection = val;}, //更新 表格中每次选中/取消选中的  集合变化
-
+            handleSelectionChange(val) { this.multipleSelection = val;}, //更新 表格中每次选中/取消选中的  集合变化
+            addSaveTodo() {  this.getuser();},  // location.reload()// 刷新整个页面
             //index 是数组索引  row是当前选定对象 console.log(index);console.log(row);
             handleDelete: function (index,row) {
                 var _this = this;
                 console.log(row);
                 this.$confirm('确认删除该记录吗?', '提示', {type: 'warning'}).then(() => {
                     this.$axios.delete('api/sys_user/'+row.id).then(function(res){
-//                        console.log(res)
-//                        if(res.ok){
+                        console.log(res)
                         _this.$message({message: '删除成功',type: 'success'}); //
                         _this.getuser();// 删除成功后 刷新当前组件
-//                        }
-                    })
-                }).catch(() => { });// this.tableData.splice(index, 1);// 删除本地元素
+                    }) }).catch(() => { });// this.tableData.splice(index, 1);// 删除本地元素
+            },
+            batchDelete(){ // 批量删除
+                var _this = this;
+                var ids = this.multipleSelection.map(item => item.id).join()//获取所有选中行的id组成的字符串，以逗号分隔
+                this.$confirm('确认删除多条记录吗?', '提示', {type: 'warning'}).then(() => {
+                    _this.$axios.delete('api/sys_user/'+ids).then(function(res){
+                        _this.$message({message: '删除成功',type: 'success'}); //
+                        _this.getuser();// 删除成功后 刷新当前组件
+                    }) }).catch(() => { });// this.tableData.splice(index, 1);// 删除本地元素
+            },
+            handleEdit: function (index,row) {
+                this.$store.state.dialog_store.edit_show=true;
+                this.$store.state.dialog_store.edit_model = this.tableData[index];
             },
         }
     }

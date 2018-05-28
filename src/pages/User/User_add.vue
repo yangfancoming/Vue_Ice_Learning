@@ -3,7 +3,7 @@
   <!--shit  1. ref="ruleForm" 中的 'ruleForm' 需要当String 传入 提交表单函数 -->
   <!--shit  2. prop="_name"  中的 '_name'的命名必须与 v-model="user._name" 中的 _name 名称相同 -->
   <!--shit  3. el-dialog  中的:before-close 为右上角关闭按钮事件 -->
-  <el-dialog title="新增" width="50%"   center   :visible.sync="show_state1" :before-close="beforeClose">   <!-- sos 这里不能使用 this.$store.state.dialog_store.show=true; 因为计算属性 需要 引入mapGetters 写成单变量形式 show_state -->
+  <el-dialog title="新增" width="50%"   center   :visible.sync="add_show" :before-close="beforeClose">   <!-- sos 这里不能使用 this.$store.state.dialog_store.show=true; 因为计算属性 需要 引入mapGetters 写成单变量形式 show_state -->
     <el-form  :model="this.user"  ref="ruleForm" :rules="this.rules" class="demo-form-inline" >
       <el-row>
         <el-col :span="12">
@@ -72,7 +72,7 @@
 
     <div slot="footer" class="dialog-footer">
       <el-button type="primary" icon="el-icon-check" @click="dialog_ok('ruleForm')" >确 定</el-button>
-      <el-button type="danger" icon="el-icon-close" @click="$store.state.dialog_store.show=false">取 消</el-button>
+      <el-button type="danger" icon="el-icon-close" @click="$store.state.dialog_store.add_show=false">取 消</el-button>
     </div>
   </el-dialog>
 </template>
@@ -80,11 +80,14 @@
 <script>
   import { validateMobile } from '@/utils/validate';
 //  import {httpUrl} from '../../utils/http_url';
-import { mapGetters } from 'vuex'
+import { mapGetters ,mapState} from 'vuex'
   export default {
-      computed: mapGetters([ 'show_state1' ]),
+      computed: {
+          ...mapGetters([ 'add_show','edit_show' ]),
+//          ...mapState(['tableData','show' ]),
+      },
 
-    data() {
+      data() {
         const Myvalidate = (rule, value, callback) => {
             if (!validateMobile(value)) {
                 callback(new Error('请输入正确手机号码！'))
@@ -121,7 +124,7 @@ import { mapGetters } from 'vuex'
     },
 
     watch: {
-        show_state1: function (newQuestion, oldQuestion) {
+        add_show: function (newQuestion, oldQuestion) {
             console.log(newQuestion,oldQuestion);
             if(newQuestion){this.user = {} }// 监视 新增框弹出  如果弹出则 清空弹出框中的所有内容 防止记录上次内容
             else {this.cancelFieldValidate('ruleForm')} // 监视 关闭新增框 时 清除校检信息 防止记录上次的校检信息
@@ -129,32 +132,31 @@ import { mapGetters } from 'vuex'
     },
 
     methods: {
-        beforeClose() {this.$store.state.dialog_store.show=false},
+        beforeClose() {this.$store.state.dialog_store.add_show=false},
         cancelFieldValidate (formName) { this.$refs[formName].resetFields();}, // 清除校检信息 防止记录上次的校检信息
-
-      dialog_ok(formName){
-          var _this = this;
-          this.$refs[formName].validate((valid) => {
-              if (valid){
-                  let user = {
-                      _username:this.user._username,
-                      _name:this.user._name,
-                      _sid:this.user._sid,
-                      _sex:this.user._sex,
-                      _dob:this.user._dob,
-                      _isenable:this.user._isenable,
-                      _remark:this.user._remark, }
-                  this.$axios.post('api/sys_user', user)
-                      .then(function (response) {
-                          _this.$message.success('新增成功！');
-                          _this.$store.state.dialog_store.show=false;// 添加成功后 隐藏自身对话框
+        dialog_ok(formName){
+            var _this = this;
+            this.$refs[formName].validate((valid) => {
+                if (valid){
+                    let user = {
+                        _username:this.user._username,
+                        _name:this.user._name,
+                        _sid:this.user._sid,
+                        _sex:this.user._sex,
+                        _dob:this.user._dob,
+                        _isenable:this.user._isenable,
+                        _remark:this.user._remark, }
+                    this.$axios.post('api/sys_user', user).then(function (res) {
+                        _this.$message.success('新增成功！');
+                        _this.$store.state.dialog_store.add_show=false,
+                        _this.$emit('addSaveTodo'); // 添加成功后 隐藏自身对话框
 //                          _this.$router.push({path:"/system/goat",info:{haha:"山羊传递的信息"}});// router 跳转！！！
-                          console.log(response);
-                      })
-                      .catch(function (error) { console.log(error);});
-              }
-          });
-      }
+                        console.log(res);
+                    })
+                        .catch(function (error) { console.log(error);});
+                }
+            });
+        }
     }
   }
 </script>
