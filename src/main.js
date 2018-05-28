@@ -7,7 +7,7 @@ import App from './App.vue';
 import router from './router.js';
 
 import store from './store' // 1.sos 引入 vuex 模块
-import './veevalidate/Validate'
+import './utils/VeeValidate'
 
 import axios from 'axios'
 Vue.prototype.$axios = axios // SOS 给vue原型挂载一个属性 这样一来 就可以全局使用了 this.$axios

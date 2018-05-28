@@ -8,8 +8,8 @@
       <el-row>
         <el-col :span="12">
           <el-form-item prop="_username" label="账号" :label-width="formLabelWidth">
-            <!--<el-input v-model="user._username"  placeholder="请输入 账号"></el-input>-->
-            <el-input v-model="user._username"   v-validate="'required|email'" :class="{'input': true, 'is-danger': errors.has('email') }" name="email" type="text" placeholder="请输入 账号"></el-input>   {{ errors.first('email') }}
+              <el-input v-model="user._username"  placeholder="请输入 账号"></el-input>
+
           </el-form-item>
         </el-col>
           <el-col :span="12">
@@ -18,14 +18,27 @@
               </el-form-item>
           </el-col>
       </el-row>
-        <!--<input v-validate="'required|email'" :class="{'input': true, 'is-danger': errors.has('email') }" name="email" type="text"  placeholder="Email">-->
-        <!--<span v-show="errors.has('email')" class="help is-danger">-->
-      <!--{{ errors.first('email') }}-->
-    <!--</span>-->
+
+
+        <el-row>
+            <el-col :span="12">
+                <el-form-item prop="_tel" label="电话" :label-width="formLabelWidth">
+                    <el-input v-model="user._tel"  placeholder="请输入 电话"></el-input>
+
+                </el-form-item>
+            </el-col>
+            <el-col :span="12">
+                <el-form-item prop="_name" label="姓名" :label-width="formLabelWidth">
+                    <el-input v-model="user._name1"  placeholder="请输入 姓名"></el-input>
+                </el-form-item>
+            </el-col>
+        </el-row>
+
+
       <el-row>
         <el-col :span="12">
           <el-form-item prop="_sid" label="工号" :label-width="formLabelWidth">
-            <el-input v-model="user._sid"   placeholder="请输入 工号"></el-input>
+            <el-input v-model.number="user._sid"   placeholder="请输入 工号"></el-input>
           </el-form-item>
         </el-col>
           <el-col :span="12">
@@ -65,18 +78,18 @@
 </template>
 
 <script>
-//  import { validateMobile } from '@/utils/validate';
+  import { validateMobile } from '@/utils/validate';
 //  import {httpUrl} from '../../utils/http_url';
 import { mapGetters } from 'vuex'
   export default {
       computed: mapGetters([ 'show_state1' ]),
 
     data() {
-//        const Myvalidate = (rule, value, callback) => {
-//            if (!validateMobile(value)) {
-//                callback(new Error('请输入正确手机号码！'))
-//            }
-//        }
+        const Myvalidate = (rule, value, callback) => {
+            if (!validateMobile(value)) {
+                callback(new Error('请输入正确手机号码！'))
+            }
+        }
       return {
         sex:'',
           user:{      // sos 这里的 对象名 不能与 edit 组件中的  对象名 相同  否则 点击编辑后  再点击新增 会记录回显的信息
@@ -100,8 +113,8 @@ import { mapGetters } from 'vuex'
             _remark: [
                 { required: true, message: '请输入 备注', trigger: 'blur' },
                 {  min: 3, max: 50, message: '长度在 3 到 50 个字符', trigger: 'blur' } ],  //
-//            _tel: [
-//                { required: true,  trigger: 'blur',validator: Myvalidate  }], // sos  这里指定了 自定义验证 所以不能 使用message: '请选择日期' 属性 否则回调显示的验证信息就无法显示
+            _tel: [
+                { required: true,  trigger: 'blur',validator: Myvalidate  }], // sos  这里指定了 自定义验证 所以不能 使用message: '请选择日期' 属性 否则回调显示的验证信息就无法显示
         },
       }
 

@@ -9,6 +9,7 @@ import NotFound from './pages/NotFound';
 import Vuex from './pages/Vuex/Vuex.vue'; // sos 2. 这里加入 新增页面信息
 import User from './pages/User/User.vue';
 import Login from './pages/Login/Login.vue';
+import VeeValidate from './pages/VeeValidate/VeeValidate.vue';
 import ExceptionPages from './pages/ExceptionPages/ExceptionPages.vue';
 
 const routerConfig = [
@@ -17,7 +18,7 @@ const routerConfig = [
   {
     path: '/',layout: HeaderAsideLayout,component: Dashboard,
     children: [
-      { path: '/dashboard/analysis',layout: HeaderAsideLayout,component: Dashboard, },
+      { path: '/dashboard/veeValidate',layout: HeaderAsideLayout,component: VeeValidate, },
       { path: '/dashboard/user',layout: HeaderAsideLayout,component: User,},
       { path: '/dashboard/vuex', layout: HeaderAsideLayout, component: Vuex }, // sos 3. 这里加入 新增页面信息
       { path: '/dashboard/workplace',layout: HeaderAsideLayout,component: NotFound,},

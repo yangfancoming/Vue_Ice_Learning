@@ -59,10 +59,10 @@ AutoCAD Excel Word 等办公软件的二次开发等等。
             render: h => h(App),
         }).$mount('#app');
     # 3. 在 xxx.vue 文件中  即 可以 通过 {{ $store.state.count }} 使用
-  ##  引入 vee_validate 插件
+  ##  引入 vee_validate 插件（虽然该插件比较火，但是个人用起来不是很顺手，所以项目中并没有使用，只是讲解如何引入）
     # 1. 安装vee_validate 插件  cnpm install vee-validate --save
     # 2. 在main.js文件中  加入 import './veevalidate/Validate' 
-    # 3. 在对应路径下 加入 Validate.js 文件  文件内容 参考源码
+    # 3. 在对应路径下 加入 VeeValidate.js 文件  文件内容 参考源码
     # 4. 这里有一个大坑，由于   vee_validate 版本更新  网络上很多方法 不再适用  新版本的 需要额外引入 vue-i18n  
     # 5. cnpm install vue-i18n
     # 5. 如果您的项目同时还引入了 elementui 的话  那么会引起冲突 vee_validate插件和 elementui 使用的计算属性 有个 fileds 同名字段导致的 解决方法 参考一下截图和源码
