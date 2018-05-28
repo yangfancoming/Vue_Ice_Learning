@@ -2,21 +2,21 @@
 
 const dialog_store = {
     state: {
-        add_show:false,
-        edit_show:false,
-        count:10,
-        edit_model:{},  },
+        add_show:false, //  新增框 呈现标志
+        edit_show:false, //  编辑框 呈现标志
+        count:10,  //  暂时没意义
+        edit_model:{}, //  编辑框 回显model
+    },
 
-    getters:{
+    getters:{  // state的计算属性 暴露给外部
         add_show: state => state.add_show,
         edit_show: state => state.edit_show,
         edit_model: state => state.edit_model,
-    } ,   // state的计算属性
+    } ,
 
     mutations: {
-        switch_dialog(state){//这里的state对应着上面这个state
+        switch_dialog(state){//这里的state对应着上面这个 state 大对象
             state.show = state.show?false:true;
-            //你还可以在这里执行其他的操作改变state
         }
     },
     actions: {

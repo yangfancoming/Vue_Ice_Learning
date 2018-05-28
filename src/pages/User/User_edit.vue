@@ -57,8 +57,7 @@
 </template>
 
 <script>
-  import { validateMobile } from '@/utils/validate';
-import { mapGetters ,mapState} from 'vuex'
+import { mapGetters} from 'vuex'
   export default {
       computed: {
           ...mapGetters([ 'edit_show' ]),

@@ -1,5 +1,4 @@
 <template>
-
   <!--shit  1. ref="ruleForm" 中的 'ruleForm' 需要当String 传入 提交表单函数 -->
   <!--shit  2. prop="_name"  中的 '_name'的命名必须与 v-model="user._name" 中的 _name 名称相同 -->
   <!--shit  3. el-dialog  中的:before-close 为右上角关闭按钮事件 -->
@@ -18,7 +17,6 @@
               </el-form-item>
           </el-col>
       </el-row>
-
 
         <!--<el-row>-->
             <!--<el-col :span="12">-->
@@ -50,7 +48,6 @@
               </el-form-item>
           </el-col>
       </el-row>
-        <!--<input v-validate="'required|alpha_num'" name="" type="text" placeholder="能输入字母数字">-->
 
       <el-row>
           <el-col :span="12"> <!-- fuck value-format="yyyy-MM-dd"  日期选择器 需要 这样进行时间格式化！-->
@@ -94,7 +91,6 @@ import { mapGetters ,mapState} from 'vuex'
             }
         }
       return {
-        sex:'',
           user:{      // sos 这里的 对象名 不能与 edit 组件中的  对象名 相同  否则 点击编辑后  再点击新增 会记录回显的信息
           _isenable:true, //  启用/禁用状态 需要在这里初始化默认值  否则 新增的时候 会默认为空 而不是 true/false
         },
@@ -120,7 +116,6 @@ import { mapGetters ,mapState} from 'vuex'
                 { required: true,  trigger: 'blur',validator: Myvalidate  }], // sos  这里指定了 自定义验证 所以不能 使用message: '请选择日期' 属性 否则回调显示的验证信息就无法显示
         },
       }
-
     },
 
     watch: {
@@ -138,18 +133,10 @@ import { mapGetters ,mapState} from 'vuex'
             var _this = this;
             this.$refs[formName].validate((valid) => {
                 if (valid){
-                    let user = {
-                        _username:this.user._username,
-                        _name:this.user._name,
-                        _sid:this.user._sid,
-                        _sex:this.user._sex,
-                        _dob:this.user._dob,
-                        _isenable:this.user._isenable,
-                        _remark:this.user._remark, }
-                    this.$axios.post('api/sys_user', user).then(function (res) {
+                    this.$axios.post('api/sys_user', this.user).then(function (res) {
                         _this.$message.success('新增成功！');
                         _this.$store.state.dialog_store.add_show=false,
-                        _this.$emit('addSaveTodo'); // 添加成功后 隐藏自身对话框
+                            _this.$emit('addSaveTodo'); // 添加成功后 隐藏自身对话框
 //                          _this.$router.push({path:"/system/goat",info:{haha:"山羊传递的信息"}});// router 跳转！！！
                         console.log(res);
                     })

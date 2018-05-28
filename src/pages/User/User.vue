@@ -87,7 +87,6 @@
         components:{ User_add,User_edit } ,// 注册局部组件
         data() {
             return {
-//                user:{},
                 listQuery: { _dob:'',_name:'',_username:'',pageNum: 1,pageSize: 10,total: null,sort: '+id'},
                 loading:false,
                 tableData: null,
