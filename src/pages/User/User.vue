@@ -95,7 +95,6 @@
             this.getuser();
         },
         methods:{
-
             resetForm (formName) {
 //               this.$refs.listQuery.resetFields();// shit 或者这种方法 不带参数也可以
                 this.$refs[formName].resetFields();
@@ -112,6 +111,21 @@
             },
             rowclick(row, event, column){this.$refs.multipleTable.toggleRowSelection(row);},
             handleSelectionChange(val) { console.info(val); this.multipleSelection = val;}, //更新 表格中每次选中/取消选中的  集合变化
+
+            //index 是数组索引  row是当前选定对象 console.log(index);console.log(row);
+            handleDelete: function (index,row) {
+                var _this = this;
+                console.log(row);
+                this.$confirm('确认删除该记录吗?', '提示', {type: 'warning'}).then(() => {
+                    this.$axios.delete('api/sys_user/'+row.id).then(function(res){
+//                        console.log(res)
+//                        if(res.ok){
+                        _this.$message({message: '删除成功',type: 'success'}); //
+                        _this.getuser();// 删除成功后 刷新当前组件
+//                        }
+                    })
+                }).catch(() => { });// this.tableData.splice(index, 1);// 删除本地元素
+            },
         }
     }
 </script>

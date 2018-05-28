@@ -20,19 +20,19 @@
       </el-row>
 
 
-        <el-row>
-            <el-col :span="12">
-                <el-form-item prop="_tel" label="电话" :label-width="formLabelWidth">
-                    <el-input v-model="user._tel"  placeholder="请输入 电话"></el-input>
+        <!--<el-row>-->
+            <!--<el-col :span="12">-->
+                <!--<el-form-item prop="_tel" label="电话" :label-width="formLabelWidth">-->
+                    <!--<el-input v-model="user._tel"  placeholder="请输入 电话"></el-input>-->
 
-                </el-form-item>
-            </el-col>
-            <el-col :span="12">
-                <el-form-item prop="_name" label="姓名" :label-width="formLabelWidth">
-                    <el-input v-model="user._name1"  placeholder="请输入 姓名"></el-input>
-                </el-form-item>
-            </el-col>
-        </el-row>
+                <!--</el-form-item>-->
+            <!--</el-col>-->
+            <!--<el-col :span="12">-->
+                <!--<el-form-item prop="_name" label="姓名" :label-width="formLabelWidth">-->
+                    <!--<el-input v-model="user._name1"  placeholder="请输入 姓名"></el-input>-->
+                <!--</el-form-item>-->
+            <!--</el-col>-->
+        <!--</el-row>-->
 
 
       <el-row>
@@ -106,8 +106,8 @@ import { mapGetters } from 'vuex'
             _sid: [
                 { required: true, message: '请输入 工号',trigger: 'blur'},
                 { type: 'number', message: '年龄必须为数字值'}],
-//            _dob: [
-//                { type: 'date', required: true, message: '请选择日期', trigger: 'blur' }],
+            _dob: [
+                { type: 'date', required: true, message: '请选择日期', trigger: 'blur' }],
             _sex: [
                 { required: true, message: '请选择 性别', trigger: 'change' }       ],
             _remark: [
@@ -148,7 +148,7 @@ import { mapGetters } from 'vuex'
                       .then(function (response) {
                           _this.$message.success('新增成功！');
                           _this.$store.state.dialog_store.show=false;// 添加成功后 隐藏自身对话框
-                          _this.$router.push({path:"/system/goat",info:{haha:"山羊传递的信息"}});// router 跳转！！！
+//                          _this.$router.push({path:"/system/goat",info:{haha:"山羊传递的信息"}});// router 跳转！！！
                           console.log(response);
                       })
                       .catch(function (error) { console.log(error);});
