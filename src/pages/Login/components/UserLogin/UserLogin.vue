@@ -6,21 +6,17 @@
 
       <div class="form-container">
         <h2 class="form-title">登录</h2>
-        <el-form ref="form"  label-width="0">
+        <el-form ref="form"  :model="user" label-width="0">
             <el-form-item prop="username">
-                <span class="svg-container svg-container_login"><svg-icon icon-class="user" /></span>
-                <el-input name="username" type="text"  autoComplete="on" placeholder="username" />
+                <span class="svg-container svg-container_login">账号：</span>   <el-input name="username" v-model="user.username" type="text"  autoComplete="on" placeholder="请输入账号" />
             </el-form-item>
 
             <el-form-item prop="password">
-                <span class="svg-container"><svg-icon icon-class="password"></svg-icon></span>
-                <el-input name="password"  autoComplete="on" placeholder="password"></el-input>
-                <span class="show-pwd" ><svg-icon icon-class="eye" /></span>
+                <span class="svg-container">密码：</span>   <el-input type='password'  @keyup.enter.native="handleLogin"  name="password"  v-model="user.password" autoComplete="on" placeholder="请输入密码"></el-input>
             </el-form-item>
 
-
             <el-form-item>
-                <el-button type="primary" class="submit-btn" size="small" @click="submitBtn"> 登 录</el-button>    <!--<a href="/" class="link"> 可以直接跳转 </a>-->
+                <el-button type="success" class="submit-btn" size="small" @click="handleLogin"> 登 录</el-button>    <!--<a href="/" class="link"> 可以直接跳转 </a>-->
             </el-form-item>
         </el-form>
 
@@ -40,22 +36,18 @@ export default {
   data() {
     return {
       backgroundImage: backgroundImage,
-      user: {  username: '',password: '',},
+      user: {  username: '',password: ''},
     };
   },
 
 
   methods: {
-    submitBtn() {
-        this.$router.push('/');
-      this.$refs['form'].validate((valid) => {
-        if (valid) {
-          this.$message({
-            message: '登录成功',
-            type: 'success',
-          });
-        }
-      });
+      handleLogin() {
+          console.log(this.user,'login');
+          this.$axios('http://127.0.0.1:8063/login', this.user).then(function (res) {
+                  console.log(res);
+              }).catch(function (error) { console.log(error);});
+
     },
   },
 };

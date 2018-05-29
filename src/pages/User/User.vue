@@ -76,7 +76,6 @@
               </template>
           </el-table-column>
       </el-table>
-
   </div>
 
 </template>
@@ -87,7 +86,7 @@
         components:{ User_add,User_edit } ,// 注册局部组件
         data() {
             return {
-                listQuery: { _dob:'',_name:'',_username:'',pageNum: 1,pageSize: 10,total: null,sort: '+id'},
+                listQuery: { _dob:'',_name:'',_username:'',pageNum: 1,pageSize: 10,total: null,sort: 'id'},
                 loading:false,
                 tableData: null,
                 multipleSelection: [], // 存储 选中记录的集合
@@ -102,8 +101,8 @@
                 this.$refs[formName].resetFields();
             },
             getuser(){
-                this.$axios.get('api/sys_user').then(  // sos 全局引用 方法 在main.js中 加入import axios from 'axios' 和 Vue.prototype.$ajax = axios
-                    (res) => { console.log(res.data,'请求失败');this.tableData = res.data;},
+                this.$axios.post('/api/sys_user/queryList',this.listQuery).then(  // sos 全局引用 方法 在main.js中 加入import axios from 'axios' 和 Vue.prototype.$ajax = axios
+                    (res) => { console.log(res.data,'请求成功');this.tableData = res.data;},
                     (err)=>  { console.log(err,'请求失败');});
             },
             dateFormat:function(row, column) {  //时间格式化
