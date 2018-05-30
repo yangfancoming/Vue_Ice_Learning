@@ -11,11 +11,11 @@
       <el-form :model="listQuery" ref="listQuery" :inline="true" class="demo-form-inline" >
           <div align="center" >
               <el-form-item prop="_name" label="姓名：">
-                  <el-input  placeholder="请输入姓名" v-model="listQuery._name"></el-input>
+                  <el-input  placeholder="请输入姓名" v-model="listQuery.name"></el-input>
               </el-form-item>
 
               <el-form-item  prop="_dob" label="出生日期" >
-                  <el-date-picker v-model="listQuery._dob" type="date" placeholder="选择日期" :editable=false value-format="yyyy-MM-dd"> </el-date-picker>
+                  <el-date-picker v-model="listQuery.dob" type="date" placeholder="选择日期" :editable=false value-format="yyyy-MM-dd"> </el-date-picker>
               </el-form-item>
           </div>
 
@@ -48,17 +48,17 @@
 
           <el-table-column type="selection" width="55" align="center"> </el-table-column>
           <el-table-column prop="id" label="编号" align="center"> </el-table-column>
-          <el-table-column prop="_username" label="账号" align="center"> </el-table-column>
-          <el-table-column prop="_name" label="姓名" align="center"> </el-table-column>
-          <el-table-column prop="_sid" label="工号" align="center" sortable show-overflow-tooltip> </el-table-column>
+          <el-table-column prop="username" label="账号" align="center"> </el-table-column>
+          <el-table-column prop="name" label="姓名" align="center"> </el-table-column>
+          <el-table-column prop="sid" label="工号" align="center" sortable show-overflow-tooltip> </el-table-column>
 
-          <el-table-column prop="scope.row._sex" align="center" label="性别" >  <!-- sos 请记住 这里的 状态回显-->
+          <el-table-column prop="scope.row.sex" align="center" label="性别" >  <!-- sos 请记住 这里的 状态回显-->
               <template slot-scope="scope">
                   <span>{{scope.row._sex == 1? '男' : '女'}}</span>
               </template>
           </el-table-column>
 
-          <el-table-column prop="_dob" label="出生日期"  align="center" :formatter="dateFormat"> </el-table-column> <!--Date of Enrollment    -->
+          <el-table-column prop="dob" label="出生日期"  align="center" :formatter="dateFormat"> </el-table-column> <!--Date of Enrollment    -->
           <el-table-column prop="scope.row._isenable" label="是否启用" align="center">
               <template slot-scope="scope">
                   <div slot="reference" class="name-wrapper">
@@ -67,7 +67,7 @@
                   </div>
               </template>
           </el-table-column>
-          <el-table-column prop="_remark" label="备注" align="center" show-overflow-tooltip> </el-table-column>
+          <el-table-column prop="remark" label="备注" align="center" show-overflow-tooltip> </el-table-column>
 
           <el-table-column label="操作" align="center" fixed="right" width="200">     <!--align="center" 列内容居中显示 -->
               <template slot-scope="scope">
@@ -86,7 +86,7 @@
         components:{ User_add,User_edit } ,// 注册局部组件
         data() {
             return {
-                listQuery: { _dob:'',_name:'',_username:'',pageNum: 1,pageSize: 10,total: null,sort: 'id'},
+                listQuery: { dob:'',name:'',username:'',pageNum: 1,pageSize: 10,total: null,sort: 'id'},
                 loading:false,
                 tableData: null,
                 multipleSelection: [], // 存储 选中记录的集合
