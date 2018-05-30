@@ -1,12 +1,6 @@
 # Admin Lite
-> 前言：正式当一名程序员已经快两年了，涉及的领域比较杂，
-bootstrap easyui ssm 等前后端项目，
-C#做PC端上位机，
-andriod studio 做安卓原生应用，
-weex 混合式开发，
-AutoCAD Excel Word 等办公软件的二次开发等等。
-在学习的过程中 遇到很多的问题 都是靠 baidu google GitHub 等查找解决方法。很感谢那些乐于分享的小伙伴们。
-最近在学习 vue 和 springboot 因此 把自己学习中 遇到的坑和经验总结 在这里分享给大家，希望能够帮到一起学习的小伙伴们。
+
+>  最近在学习 vue 和 springboot 因此 把自己学习中 遇到的坑和经验总结 在这里分享给大家，希望能够帮到一起学习的小伙伴们。
 因为我也是新手，文档和项目中 如果不合理或错误的地方 希望大神不吝指教，万分感谢！
 
 > 该项目使用阿里的 icework模板生成工具 从 0 到 1 开始搭建项目，内置基础的页面，路由和菜单展示。
@@ -22,15 +16,17 @@ AutoCAD Excel Word 等办公软件的二次开发等等。
    ![image](https://github.com/yangfancoming/Vue_Ice_Learning/raw/master/Screenshots/all_add.png)
 
    ##  技术栈: (未完待续)
-       # 前端：vue.js 2.5 + element-UI + jsonserver + mock.js
+       # 前端：vue.js 2.5 + vuex + vue-router + axios + element-UI 
          1.采用 Vue-Video-Player 视频播放插件
          2.采用 audio 音频播放插件
          3.采用 谷歌 guava Java核心库
          3.采用 vee-validate 对前台表单数据 进行校检
+         4.项目前期使用 jsonserver + mock.js 作为模拟数据
        # 后端：springboot + Mybatis + SpringSecurity
          1.采用 easypoi 插件 对表格进行导入导出 
          2.采用 Hibernate Validator 插件 对Excel导入数据 进行校检
          3.采用 Mybatis 分页插件 PageHelper
+         4.采用 JWT 
 
 
   ##  引入登录页面:
