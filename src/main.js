@@ -17,6 +17,7 @@ Vue.prototype.$axios = axios // SOS 给vue原型挂载一个属性 这样一来 
 import moment from "moment";
 Vue.prototype.$moment = moment //
 
+import '@/permission' // 这里加载 permission.js 其中定义了全局 路由钩子
 
 Vue.use(ElementUI);
 Vue.config.productionTip = false;

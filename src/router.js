@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import routerConfig from './routerConfig';
 
+
 /**
  * 将路由配置扁平化
  * @param {Array} config 路由配置
