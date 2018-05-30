@@ -1,13 +1,18 @@
 import axios from 'axios'
+import store from '../store'
 import {  Message } from 'element-ui' // sos 注意这里  js文件文件中 调用element UI 的方法
 // import qs from 'qs'
-axios.defaults.timeout = 5000;
+axios.defaults.timeout = 100000;
 // axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8';
-// axios.defaults.headers.post["Content-type"] = "application/json;charset=utf-8"
+axios.defaults.headers.post["Content-type"] = "application/json;charset=utf-8"
 // axios.defaults.headers.post["Content-type"] = "application/json"
 // axios.defaults.baseURL = 'http://127.0.0.1:9966';
 axios.defaults.baseURL = 'http://127.0.0.1:8063';
 axios.interceptors.request.use((config) => {
+    console.log(store.state.user.token,'hahahahahahahaha' +store.state.user.token);
+    if (store.state.user.token) {
+        config.headers['Authorization'] = 'Bearer ' + store.state.user.token // 让每个请求携带自定义token 请根据实际情况自行修改
+    }
     if(config.method  === 'post'){
         // config.data = qs.stringify(config.data); // fuck 这里不能使用  stringify ！
         // fuck stringify 转换结果为  _dob=&_name=&_username=&pageNum=1&pageSize=10&total=&sort=id  传到后台 JSON.parse 解析会失败
@@ -29,10 +34,10 @@ axios.interceptors.response.use((res) =>{
     return res;
 }, (err) => {
     Message.error('请求失败！');
-    console.log(err.response,'整个错误.'); // sos 注意这里  err 后需要加上 response 才能拿到返回信息！！！
-    console.log(err.response.data.status,'错误状态码.');
-    console.log(err.response.data.message,'错误信息')
-    console.log(err.response.data.errorCode,'错误码')
+    // console.log(err.response,'整个错误.'); // sos 注意这里  err 后需要加上 response 才能拿到返回信息！！！
+    // console.log(err.response.data.status,'错误状态码.');
+    // console.log(err.response.data.message,'错误信息')
+    // console.log(err.response.data.errorCode,'错误码')
     return Promise.reject(err);
 });
 

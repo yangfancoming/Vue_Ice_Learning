@@ -46,9 +46,15 @@ export default {
 
   methods: {
       handleLogin() {
+          var _this = this;
           // sos 全局引用 方法 在main.js中 加入import axios from 'axios' 和 Vue.prototype.$ajax = axios
           this.$axios.post('/api/auth/login', this.user).then(
-              (res) => { console.log(res.data,'请求111成功'); this.$router.push({ path: '/' })},
+              (res) => {
+                  console.log(res.data.token,'请求111成功');
+//                  _this.$store.commit('SET_TOKEN', data.msg);
+                  _this.$store.state.user.token = res.data.token;
+                  this.$router.push({ path: '/' })
+              },
               (err)=>  { console.log(err,'请求111失败');});
     },
 

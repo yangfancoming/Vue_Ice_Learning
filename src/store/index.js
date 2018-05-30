@@ -2,7 +2,8 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 // import app from './modules/app'
 // import user from './modules/user'
-import dialog_store from './modules/dialog_store'
+import dialog_store from './modules/dialog_store.js'
+import user from './modules/user.js'
 // import getters from './getters'
 
 Vue.use(Vuex)
@@ -21,7 +22,7 @@ const store = new Vuex.Store({
     // 提交mutation，异步操作  sos context 是 state 的父级，包含  state、getters
   },
   // modules: { app , user ,dialog_store},
-  modules: { dialog_store },
+  modules: { dialog_store,user },
 })
 export default store
 /**
