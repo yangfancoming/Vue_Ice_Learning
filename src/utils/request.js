@@ -1,17 +1,20 @@
 import axios from 'axios'
 import store from '../store'
+import router from '../router.js';
 import {  Message } from 'element-ui' // sos 注意这里  js文件文件中 调用element UI 的方法
 // import qs from 'qs'
 axios.defaults.timeout = 100000;
 // axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8';
-axios.defaults.headers.post["Content-type"] = "application/json;charset=utf-8"
+// axios.defaults.headers.post["Content-type"] = "application/json;charset=utf-8"
 // axios.defaults.headers.post["Content-type"] = "application/json"
 // axios.defaults.baseURL = 'http://127.0.0.1:9966';
 axios.defaults.baseURL = 'http://127.0.0.1:8063';
 axios.interceptors.request.use((config) => {
-    console.log(store.state.user.token,'hahahahahahahaha' +store.state.user.token);
-    if (store.state.user.token) {
-        config.headers['Authorization'] = 'Bearer ' + store.state.user.token // 让每个请求携带自定义token 请根据实际情况自行修改
+    // console.log(store.state.user.token,'hahahahahahahaha' +store.state.user.token);
+    var token = JSON.parse(localStorage.getItem('token'));
+    // if (store.state.user.token) {
+    if (token) {
+        config.headers['Authorization'] = 'Bearer ' + token // 让每个请求携带自定义token 请根据实际情况自行修改
     }
     if(config.method  === 'post'){
         // config.data = qs.stringify(config.data); // fuck 这里不能使用  stringify ！
@@ -33,13 +36,33 @@ axios.interceptors.response.use((res) =>{
     }
     return res;
 }, (err) => {
-    Message.error('请求失败！');
-    // console.log(err.response,'整个错误.'); // sos 注意这里  err 后需要加上 response 才能拿到返回信息！！！
-    // console.log(err.response.data.status,'错误状态码.');
-    // console.log(err.response.data.message,'错误信息')
-    // console.log(err.response.data.errorCode,'错误码')
+    var string ;
+    console.log(err.response,"err.response");
+    switch (err.response.data.status){
+        case 401: string = err.response.data.message;
+        if(err.response.data.errorCode==11) {
+            string = 'token 已过期 请重新登录';
+            localStorage.removeItem('token');
+            router.push({ path: '/' })
+        };
+            break;
+    }
+    Message.error(string);
+    console.log(err.response,'整个错误.'); // sos 注意这里  err 后需要加上 response 才能拿到返回信息！！！
+    console.log(err.response.data.status,'错误状态码.');
+    console.log(err.response.data.message,'错误信息')
+    console.log(err.response.data.errorCode,'错误码')
     return Promise.reject(err);
 });
+
+
+// 方案一、
+// // 这里写的答案是指data.body.data是JSON。不是JSON则不需要JSON.parse和JSON.stringify
+// 存储：localStorage.data = JSON.stringify(data.body.data);
+// 获取：JSON.parse(localStorage.data);
+// 方案二、
+// 存储：localStorage.setItem('data',JSON.stringify(data.body.data));
+// 获取：JSON.parse(localStorage.getItem('data'));
 
 // export const postRequest = (url, params) => {
 //     return axios({

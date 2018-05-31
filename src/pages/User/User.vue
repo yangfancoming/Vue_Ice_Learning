@@ -82,6 +82,7 @@
 <script>
     import User_add from './User_add.vue';
     import User_edit from './User_edit.vue';
+    import {StrToGMT,GMTToStr} from '../../utils/times.js';
     export default {
         components:{ User_add,User_edit } ,// 注册局部组件
         data() {
@@ -102,8 +103,11 @@
             },
             getuser(){
                 this.$axios.post('/api/sys_user/queryList',this.listQuery).then(  // sos 全局引用 方法 在main.js中 加入import axios from 'axios' 和 Vue.prototype.$ajax = axios
-                    (res) => { console.log(res.data,'请求成功');this.tableData = res.data;},
-                    (err)=>  { console.log(err,'请求失败');});
+                    (res) => {
+                        console.log(res,'111133333333333');
+                        this.tableData = res.data.data;
+                        },
+                    (err)=>  {});
             },
             dateFormat:function(row, column) {  //时间格式化
                 var date = row[column.property];
@@ -118,8 +122,7 @@
                 var _this = this;
                 console.log(row);
                 this.$confirm('确认删除该记录吗?', '提示', {type: 'warning'}).then(() => {
-                    this.$axios.delete('api/sys_user/'+row.id).then(function(res){
-                        console.log(res)
+                    this.$axios.delete('api/sys_user/DELETE/'+row.id).then(function(res){
                         _this.$message({message: '删除成功',type: 'success'}); //
                         _this.getuser();// 删除成功后 刷新当前组件
                     }) }).catch(() => { });// this.tableData.splice(index, 1);// 删除本地元素
@@ -128,13 +131,14 @@
                 var _this = this;
                 var ids = this.multipleSelection.map(item => item.id).join()//获取所有选中行的id组成的字符串，以逗号分隔
                 this.$confirm('确认删除多条记录吗?', '提示', {type: 'warning'}).then(() => {
-                    _this.$axios.delete('api/sys_user/'+ids).then(function(res){
+                    _this.$axios.delete('api/sys_user/batchDelete/'+ids).then(function(res){
                         _this.$message({message: '删除成功',type: 'success'}); //
                         _this.getuser();// 删除成功后 刷新当前组件
                     }) }).catch(() => { });// this.tableData.splice(index, 1);// 删除本地元素
             },
             handleEdit: function (index,row) {
                 this.$store.state.dialog_store.edit_show=true;
+                this.tableData[index].dob =  StrToGMT(this.tableData[index].dob); // 2. sos 转换
                 this.$store.state.dialog_store.edit_model = this.tableData[index];
             },
         }

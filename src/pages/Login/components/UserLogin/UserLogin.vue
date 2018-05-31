@@ -53,6 +53,7 @@ export default {
                   console.log(res.data.token,'请求111成功');
 //                  _this.$store.commit('SET_TOKEN', data.msg);
                   _this.$store.state.user.token = res.data.token;
+                  window.localStorage.setItem('token', window.JSON.stringify(res.data.token))
                   this.$router.push({ path: '/' })
               },
               (err)=>  { console.log(err,'请求111失败');});

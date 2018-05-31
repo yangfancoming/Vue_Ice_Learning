@@ -11,8 +11,11 @@ router.beforeEach((to, from, next) => {   /*在任意时刻 任意路由 发生�
   console.log(from,'beforeEach钩子 from');
   // console.log(store.getters.token,'store.getters.token');
   console.log(store.state.user.token,'store.state.user.token');
+  var token = JSON.parse(localStorage.getItem('token'));
+    console.log(token,'token');
     // $store.state.user.token
-  if (store.state.user.token) {
+  if (token) {
+  // if (store.state.user.token) {
       console.log('检测到token 可以登录');
       if (to.path === '/login') {
           console.log('beforeEach钩子 走咯' + to.path );
