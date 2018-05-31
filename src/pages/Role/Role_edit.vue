@@ -35,20 +35,12 @@
           <el-col :span="12"> <!-- fuck value-format="yyyy-MM-dd"  日期选择器 需要 这样进行时间格式化！-->
               <el-form-item  prop="dob" label="出生日期" :label-width="formLabelWidth" >
                   <el-date-picker v-model = "edit_model.dob"  type="date"  format="yyyy 年 MM 月 dd 日" value-format="yyyy-MM-dd"  placeholder="选择日期" :editable=false  > </el-date-picker>
-
               </el-form-item>
           </el-col>
         <el-col :span="12">
-            <el-form-item prop="isenable" label="是否启用" :label-width="formLabelWidth" >
-                <el-select  align="center"  v-model="edit_model.isenable"  placeholder="请选择 "> <!--style="width: 185px;" -->
-                    <el-option align="center"  label="启用" :value="1"></el-option>
-                    <el-option align="center"  label="禁用" :value="0"></el-option>
-                </el-select>
-                <!--<el-switch v-model="user.isenable" :value ="user.isenable"  inactive-text="禁用" active-text="启用" active-color="#13ce66" >  </el-switch>-->
-            </el-form-item>
-          <!--<el-form-item label="是否启用" :label-width="formLabelWidth" align="center" >-->
-            <!--<el-switch v-model="edit_model.isenable"  :active-value="1" :inactive-value="0" inactive-text="禁用" active-text="启用" active-color="#13ce66" >  </el-switch>-->
-          <!--</el-form-item>-->
+          <el-form-item label="是否启用" :label-width="formLabelWidth" align="center" >
+            <el-switch v-model="edit_model.isenable"  :active-value="1" :inactive-value="0" inactive-text="禁用" active-text="启用" active-color="#13ce66" >  </el-switch>
+          </el-form-item>
         </el-col>
       </el-row>
 
@@ -90,8 +82,6 @@ import {StrToGMT,GMTToStr} from '../../utils/times.js';
                       { type: 'string', required: true, message: '请选择日期', trigger: 'blur' }],
                   sex: [
                       { required: true, message: '请选择 性别', trigger: 'change' }       ],
-                  isenable: [
-                      { required: true, message: '请选择 是否启用', trigger: 'change' }       ],
                   remark: [
                       { required: true, message: '请输入 备注', trigger: 'blur' },
                       {  min: 3, max: 50, message: '长度在 3 到 50 个字符', trigger: 'blur' } ],  //

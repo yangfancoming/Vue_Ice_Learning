@@ -1,14 +1,11 @@
 <template>
-  <!--shit  1. ref="ruleForm" 中的 'ruleForm' 需要当String 传入 提交表单函数 -->
-  <!--shit  2. prop="_name"  中的 '_name'的命名必须与 v-model="user._name" 中的 _name 名称相同 -->
-  <!--shit  3. el-dialog  中的:before-close 为右上角关闭按钮事件 -->
-  <el-dialog title="新增" width="50%"   center   :visible.sync="add_show" :before-close="beforeClose">   <!-- sos 这里不能使用 this.$store.state.dialog_store.show=true; 因为计算属性 需要 引入mapGetters 写成单变量形式 show_state -->
+
+  <el-dialog title="新增" width="50%"   center  :visible.sync="add_show" :before-close="beforeClose">
     <el-form  :model="user"  ref="ruleForm" :rules="rules" class="demo-form-inline" >
       <el-row>
         <el-col :span="12">
           <el-form-item prop="username" label="账号" :label-width="formLabelWidth">
               <el-input v-model="user.username"  placeholder="请输入 账号"></el-input>
-
           </el-form-item>
         </el-col>
           <el-col :span="12">
@@ -27,7 +24,7 @@
           <el-col :span="12">
               <el-form-item prop="sex"  label=" 性别" :label-width="formLabelWidth">
                   <el-select  align="center"  v-model="user.sex"  placeholder="请选择 性别"> <!--style="width: 185px;" -->
-                      <el-option align="center" label="男" value="1"></el-option>
+                      <el-option align="center"  label="男" value="1"></el-option>
                       <el-option align="center"  label="女" value="0"></el-option>
                   </el-select>
               </el-form-item>
@@ -41,8 +38,12 @@
               </el-form-item>
           </el-col>
         <el-col :span="12">
-          <el-form-item prop="isenable" label="是否启用" :label-width="formLabelWidth" align="center" >
-            <el-switch v-model="user.isenable" :value ="user.isenable"  inactive-text="禁用" active-text="启用" active-color="#13ce66" >  </el-switch>
+          <el-form-item prop="isenable" label="是否启用" :label-width="formLabelWidth" >
+              <el-select  align="center"  v-model="user.isenable"  placeholder="请选择 "> <!--style="width: 185px;" -->
+                  <el-option align="center"  label="启用" value="1"></el-option>
+                  <el-option align="center"  label="禁用" value="0"></el-option>
+              </el-select>
+            <!--<el-switch v-model="user.isenable" :value ="user.isenable"  inactive-text="禁用" active-text="启用" active-color="#13ce66" >  </el-switch>-->
           </el-form-item>
         </el-col>
       </el-row>
@@ -84,10 +85,10 @@ import { mapGetters ,mapState} from 'vuex'
             }
         }
       return {
-          isenable:1,
-          user:{      // sos 这里的 对象名 不能与 edit 组件中的  对象名 相同  否则 点击编辑后  再点击新增 会记录回显的信息
-              isenable:'1', //  启用/禁用状态 需要在这里初始化默认值  否则 新增的时候 会默认为空 而不是 true/false
-          },
+            user:{},
+//          user:{      // sos 这里的 对象名 不能与 edit 组件中的  对象名 相同  否则 点击编辑后  再点击新增 会记录回显的信息
+//              isenable:'', //  启用/禁用状态 需要在这里初始化默认值  否则 新增的时候 会默认为空 而不是 true/false
+//          },
           formLabelWidth: '80px',
         rules: {
             username: [
@@ -103,6 +104,8 @@ import { mapGetters ,mapState} from 'vuex'
                 { type: 'string', required: true, message: '请选择日期', trigger: 'blur' }],
             sex: [
                 { required: true, message: '请选择 性别', trigger: 'change' }       ],
+            isenable: [
+              { required: true, message: '请选择 是否启用', trigger: 'change' }       ],
             remark: [
                 { required: true, message: '请输入 备注', trigger: 'blur' },
                 {  min: 3, max: 50, message: '长度在 3 到 50 个字符', trigger: 'blur' } ],  //
@@ -114,8 +117,8 @@ import { mapGetters ,mapState} from 'vuex'
 
     watch: {
         add_show: function (newQuestion, oldQuestion) {
-            console.log(newQuestion,oldQuestion);
-            if(newQuestion){this.user = {}; this.user.isenable= true; }// 监视 新增框弹出  如果弹出则 清空弹出框中的所有内容 防止记录上次内容 fuck 每次都不能正确回显 是因为这里清空了 我日！！！！！！1
+//            console.log(newQuestion,oldQuestion);
+            if(newQuestion){this.user = {};  }// 监视 新增框弹出  如果弹出则 清空弹出框中的所有内容 防止记录上次内容 fuck 每次都不能正确回显 是因为这里清空了 我日！！！！！！1
             else {this.cancelFieldValidate('ruleForm')} // 监视 关闭新增框 时 清除校检信息 防止记录上次的校检信息
         },
     },
