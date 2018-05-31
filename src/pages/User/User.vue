@@ -10,11 +10,11 @@
 
       <el-form :model="listQuery" ref="listQuery" :inline="true" class="demo-form-inline" >
           <div align="center" >
-              <el-form-item prop="_name" label="姓名：">
+              <el-form-item prop="name" label="姓名：">
                   <el-input  placeholder="请输入姓名" v-model="listQuery.name"></el-input>
               </el-form-item>
 
-              <el-form-item  prop="_dob" label="出生日期" >
+              <el-form-item  prop="dob" label="出生日期" >
                   <el-date-picker v-model="listQuery.dob" type="date" placeholder="选择日期" :editable=false value-format="yyyy-MM-dd"> </el-date-picker>
               </el-form-item>
           </div>
@@ -41,9 +41,9 @@
               </el-form-item>
           </div>
       </el-form>
-
+      <!--@row-click="rowclick" -->
       <!-- fuck 表格中  某一列内容过长 想要省略号和 鼠标提示详细信息  需要设置  ①el-table标签中需要添加tooltip-effect="dark"属性  ②el-table-column标签中需要添加show-overflow-tooltip属性-->
-      <el-table ref="multipleTable" tooltip-effect="dark" :data="tableData"  @selection-change="handleSelectionChange" @row-click="rowclick"  highlight-current-row  fit border  size="mini"  style="width: 100%" max-height="700"
+      <el-table ref="multipleTable" tooltip-effect="dark" :data="tableData"  @selection-change="handleSelectionChange" highlight-current-row  fit border  size="mini"  style="width: 100%" max-height="700"
                 v-loading="loading" element-loading-text="拼命加载中" element-loading-spinner="el-icon-loading"  element-loading-background="rgba(0, 0, 0, 0.8)">
 
           <el-table-column type="selection" width="55" align="center"> </el-table-column>
@@ -54,15 +54,15 @@
 
           <el-table-column prop="scope.row.sex" align="center" label="性别" >  <!-- sos 请记住 这里的 状态回显-->
               <template slot-scope="scope">
-                  <span>{{scope.row._sex == 1? '男' : '女'}}</span>
+                  <span>{{scope.row.sex == 1? '男' : '女'}}</span>
               </template>
           </el-table-column>
 
           <el-table-column prop="dob" label="出生日期"  align="center" :formatter="dateFormat"> </el-table-column> <!--Date of Enrollment    -->
-          <el-table-column prop="scope.row._isenable" label="是否启用" align="center">
+          <el-table-column prop="scope.row.isenable" label="是否启用" align="center">
               <template slot-scope="scope">
                   <div slot="reference" class="name-wrapper">
-                      <el-tag type="success" size="medium" v-if="scope.row._isenable == true">启用</el-tag>
+                      <el-tag type="success" size="medium" v-if="scope.row.isenable == true">启用</el-tag>
                       <el-tag type="danger" size="medium" v-else>禁用</el-tag>
                   </div>
               </template>
@@ -104,8 +104,8 @@
             getuser(){
                 this.$axios.post('/api/sys_user/queryList',this.listQuery).then(  // sos 全局引用 方法 在main.js中 加入import axios from 'axios' 和 Vue.prototype.$ajax = axios
                     (res) => {
-                        console.log(res,'111133333333333');
                         this.tableData = res.data.data;
+                        console.log(this.tableData,'111133333333333');
                         },
                     (err)=>  {});
             },
@@ -114,7 +114,7 @@
                 if (date === undefined) {  return "";}
                 return this.$moment(date).format("YYYY-MM-DD");//  "YYYY-MM-DD HH:mm:ss" sos 注意 这种js引入的方法！ 就相当于组件进行引入的
             },
-            rowclick(row, event, column){this.$refs.multipleTable.toggleRowSelection(row);},
+//            rowclick(row, event, column){this.$refs.multipleTable.toggleRowSelection(row);},
             handleSelectionChange(val) { this.multipleSelection = val;}, //更新 表格中每次选中/取消选中的  集合变化
             addSaveTodo() {  this.getuser();},  // location.reload()// 刷新整个页面
             //index 是数组索引  row是当前选定对象 console.log(index);console.log(row);
@@ -138,8 +138,9 @@
             },
             handleEdit: function (index,row) {
                 this.$store.state.dialog_store.edit_show=true;
-                this.tableData[index].dob =  StrToGMT(this.tableData[index].dob); // 2. sos 转换
+//                this.tableData[index].dob =  StrToGMT(this.tableData[index].dob); // 2. sos 转换
                 this.$store.state.dialog_store.edit_model = this.tableData[index];
+                console.log(this.tableData[index],'1111111111111111111')
             },
         }
     }

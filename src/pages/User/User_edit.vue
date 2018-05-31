@@ -1,7 +1,7 @@
 <template>
 
   <el-dialog title="修改" width="50%"   center   :visible.sync="edit_show" :before-close="beforeClose">
-    <el-form  :model="edit_model"  ref="ruleForm" :rules="this.rules" class="demo-form-inline" >
+    <el-form  :model="edit_model"  ref="ruleForm" :rules="rules" class="demo-form-inline" >
       <el-row>
         <el-col :span="12">
           <el-form-item prop="username" label="账号" :label-width="formLabelWidth">
@@ -24,8 +24,8 @@
           <el-col :span="12">
               <el-form-item prop="sex"  label=" 性别" :label-width="formLabelWidth">
                   <el-select  align="center"  v-model="edit_model.sex"  placeholder="请选择 性别"> <!--style="width: 185px;" -->
-                      <el-option align="center" label="男" value="1"></el-option>
-                      <el-option align="center"  label="女" value="0"></el-option>
+                      <el-option align="center"  label="男"  :value="1"></el-option>
+                      <el-option align="center"  label="女"  :value="0"></el-option>
                   </el-select>
               </el-form-item>
           </el-col>
@@ -34,18 +34,19 @@
       <el-row>
           <el-col :span="12"> <!-- fuck value-format="yyyy-MM-dd"  日期选择器 需要 这样进行时间格式化！-->
               <el-form-item  prop="dob" label="出生日期" :label-width="formLabelWidth" >
-                  <el-date-picker v-model ="edit_model.dob"  type="date" placeholder="选择日期" :editable=false  > </el-date-picker>
+                  <el-date-picker v-model = "edit_model.dob"  type="date"  format="yyyy 年 MM 月 dd 日" value-format="yyyy-MM-dd"  placeholder="选择日期" :editable=false  > </el-date-picker>
+
               </el-form-item>
           </el-col>
         <el-col :span="12">
           <el-form-item label="是否启用" :label-width="formLabelWidth" align="center" >
-            <el-switch v-model="edit_model.isenable" inactive-text="禁用" active-text="启用" active-color="#13ce66" >  </el-switch>
+            <el-switch v-model="edit_model.isenable"  :active-value="1" :inactive-value="0" inactive-text="禁用" active-text="启用" active-color="#13ce66" >  </el-switch>
           </el-form-item>
         </el-col>
       </el-row>
 
       <el-form-item prop="remark" label="备注信息" :label-width="formLabelWidth">
-        <el-input v-model="edit_model.remark" type="textarea" :autosize="{ minRows: 2, maxRows: 4}" placeholder="最多输入10个字哦~" maxlength="10">    </el-input>
+        <el-input v-model="edit_model.remark"  type="textarea" :autosize="{ minRows: 2, maxRows: 4}" placeholder="最多输入10个字哦~" maxlength="10">    </el-input>
       </el-form-item>
     </el-form>
 
@@ -79,7 +80,7 @@ import {StrToGMT,GMTToStr} from '../../utils/times.js';
                       { required: true, message: '请输入 工号',trigger: 'blur'},
                       { type: 'number', message: '工号必须为数字值'}],
                   dob: [
-                      { type: 'date', required: true, message: '请选择日期', trigger: 'blur' }],
+                      { type: 'string', required: true, message: '请选择日期', trigger: 'blur' }],
                   sex: [
                       { required: true, message: '请选择 性别', trigger: 'change' }       ],
                   remark: [
@@ -94,7 +95,6 @@ import {StrToGMT,GMTToStr} from '../../utils/times.js';
     },
 
     methods: {
-        pickTime(){},
         beforeClose() { this.$store.state.dialog_store.edit_show = false },
         cancelFieldValidate (formName) { this.$refs[formName].resetFields();}, // 清除校检信息 防止记录上次的校检信息
         dialog_ok(formName){
@@ -102,7 +102,8 @@ import {StrToGMT,GMTToStr} from '../../utils/times.js';
             this.$refs[formName].validate((valid) => {
                 if (valid){
                     console.log(this.edit_model,'PATCH')
-                    this.edit_model.dob =  GMTToStr(this.edit_model.dob); // 1. sos 转换
+//                    console.log(this.edit_model.dob,'11111111111111dob')
+//                    this.edit_model.dob =  GMTToStr(this.edit_model.dob); // 1. sos 转换
                     this.$axios.post('api/sys_user/PATCH', this.edit_model).then(function (res) {  // fuck  为什么 这里使用 .patch 后台配合使用 method= RequestMethod.PATCH 就提示禁止跨域请求呢？
                         _this.$message.success('修改成功！');
                         _this.$store.state.dialog_store.edit_show=false

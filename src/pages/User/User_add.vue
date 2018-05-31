@@ -3,7 +3,7 @@
   <!--shit  2. prop="_name"  中的 '_name'的命名必须与 v-model="user._name" 中的 _name 名称相同 -->
   <!--shit  3. el-dialog  中的:before-close 为右上角关闭按钮事件 -->
   <el-dialog title="新增" width="50%"   center   :visible.sync="add_show" :before-close="beforeClose">   <!-- sos 这里不能使用 this.$store.state.dialog_store.show=true; 因为计算属性 需要 引入mapGetters 写成单变量形式 show_state -->
-    <el-form  :model="this.user"  ref="ruleForm" :rules="this.rules" class="demo-form-inline" >
+    <el-form  :model="user"  ref="ruleForm" :rules="rules" class="demo-form-inline" >
       <el-row>
         <el-col :span="12">
           <el-form-item prop="username" label="账号" :label-width="formLabelWidth">
@@ -37,12 +37,12 @@
       <el-row>
           <el-col :span="12"> <!-- fuck value-format="yyyy-MM-dd"  日期选择器 需要 这样进行时间格式化！-->
               <el-form-item  prop="dob" label="出生日期" :label-width="formLabelWidth" >
-                  <el-date-picker v-model="user.dob" type="date" placeholder="选择日期" :editable=false  > </el-date-picker>
+                  <el-date-picker v-model="user.dob"    format="yyyy 年 MM 月 dd 日" value-format="yyyy-MM-dd"  type="date" placeholder="选择日期" :editable=false  > </el-date-picker>
               </el-form-item>
           </el-col>
         <el-col :span="12">
           <el-form-item prop="isenable" label="是否启用" :label-width="formLabelWidth" align="center" >
-            <el-switch v-model="user.isenable" inactive-text="禁用" active-text="启用" active-color="#13ce66" >  </el-switch>
+            <el-switch v-model="user.isenable" :value ="user.isenable"  inactive-text="禁用" active-text="启用" active-color="#13ce66" >  </el-switch>
           </el-form-item>
         </el-col>
       </el-row>
@@ -62,13 +62,21 @@
 <script>
   import { validateMobile } from '@/utils/validate';
 //  import {httpUrl} from '../../utils/http_url';
+  import {StrToGMT,GMTToStr} from '../../utils/times.js';
 import { mapGetters ,mapState} from 'vuex'
   export default {
       computed: {
           ...mapGetters([ 'add_show','edit_show' ]),
 //          ...mapState(['tableData','show' ]),
       },
+      created(){
+//          this.user.isenable = true;
+//          alert(this.user.isenable)
+      },
 
+      mounted(){
+//          alert(this.user.isenable)
+      },
       data() {
         const Myvalidate = (rule, value, callback) => {
             if (!validateMobile(value)) {
@@ -76,9 +84,10 @@ import { mapGetters ,mapState} from 'vuex'
             }
         }
       return {
+          isenable:1,
           user:{      // sos 这里的 对象名 不能与 edit 组件中的  对象名 相同  否则 点击编辑后  再点击新增 会记录回显的信息
-          isenable:true, //  启用/禁用状态 需要在这里初始化默认值  否则 新增的时候 会默认为空 而不是 true/false
-        },
+              isenable:'1', //  启用/禁用状态 需要在这里初始化默认值  否则 新增的时候 会默认为空 而不是 true/false
+          },
           formLabelWidth: '80px',
         rules: {
             username: [
@@ -106,7 +115,7 @@ import { mapGetters ,mapState} from 'vuex'
     watch: {
         add_show: function (newQuestion, oldQuestion) {
             console.log(newQuestion,oldQuestion);
-            if(newQuestion){this.user = {} }// 监视 新增框弹出  如果弹出则 清空弹出框中的所有内容 防止记录上次内容
+            if(newQuestion){this.user = {}; this.user.isenable= true; }// 监视 新增框弹出  如果弹出则 清空弹出框中的所有内容 防止记录上次内容 fuck 每次都不能正确回显 是因为这里清空了 我日！！！！！！1
             else {this.cancelFieldValidate('ruleForm')} // 监视 关闭新增框 时 清除校检信息 防止记录上次的校检信息
         },
     },
@@ -121,6 +130,7 @@ import { mapGetters ,mapState} from 'vuex'
                 if (valid){
                     console.log(this.user,'user');
 //                    this.$axios.post('api/sys_user', this.user).then(function (res) {
+                    this.user.dob =  GMTToStr(this.user.dob); // 1. sos 转换
                     this.$axios.post('api/sys_user/POST', this.user).then(function (res) {
                         _this.$message.success('新增成功！');
                         _this.$store.state.dialog_store.add_show=false,
