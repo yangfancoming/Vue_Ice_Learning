@@ -50,7 +50,8 @@
           <el-table-column prop="id" label="编号" align="center"> </el-table-column>
           <el-table-column prop="username" label="账号" align="center"> </el-table-column>
           <el-table-column prop="name" label="姓名" align="center"> </el-table-column>
-          <el-table-column prop="sid" label="工号" align="center" sortable show-overflow-tooltip> </el-table-column>
+          <!--<el-table-column prop="sid" label="工号" align="center" sortable show-overflow-tooltip> </el-table-column>-->
+          <el-table-column prop="sid" label="工号" align="center" > </el-table-column>
 
           <el-table-column prop="scope.row.sex" align="center" label="性别" >  <!-- sos 请记住 这里的 状态回显-->
               <template slot-scope="scope">

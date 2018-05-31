@@ -34,9 +34,9 @@
 
           <el-table-column type="selection" width="55" align="center"> </el-table-column>
           <el-table-column prop="id" label="编号" align="center"> </el-table-column>
-          <el-table-column prop="username" label="角色名称" align="center"> </el-table-column>
-          <el-table-column prop="name" label="显示顺序" align="center"> </el-table-column>
-          <el-table-column prop="dob" label="创建时间"  align="center" :formatter="dateFormat"> </el-table-column> <!--Date of Enrollment    -->
+          <el-table-column prop="name" label="角色名称" align="center"> </el-table-column>
+          <el-table-column prop="sort" label="显示顺序" align="center"> </el-table-column>
+          <el-table-column prop="createtime" label="创建时间"  align="center" :formatter="dateFormat"> </el-table-column> <!--Date of Enrollment    -->
           <el-table-column prop="remark" label="角色备注" align="center" show-overflow-tooltip> </el-table-column>
           <el-table-column prop="scope.row.isenable" label="是否启用" align="center">
               <template slot-scope="scope">
@@ -77,7 +77,7 @@
             resetForm (formName) {  this.$refs[formName].resetFields();},
 
             getuser(){
-                this.$axios.post('/api/sys_user/queryList',this.listQuery).then(  // sos 全局引用 方法 在main.js中 加入import axios from 'axios' 和 Vue.prototype.$ajax = axios
+                this.$axios.post('/api/sys_role/queryList',this.listQuery).then(  // sos 全局引用 方法 在main.js中 加入import axios from 'axios' 和 Vue.prototype.$ajax = axios
                     (res) => {
                         this.tableData = res.data.data;
                         console.log(this.tableData,'111133333333333');
@@ -87,7 +87,7 @@
             dateFormat:function(row, column) {  //时间格式化
                 var date = row[column.property];
                 if (date === undefined) {  return "";}
-                return this.$moment(date).format("YYYY-MM-DD");//  "YYYY-MM-DD HH:mm:ss" sos 注意 这种js引入的方法！ 就相当于组件进行引入的
+                return this.$moment(date).format("YYYY-MM-DD HH:mm:ss");//  "YYYY-MM-DD HH:mm:ss" sos 注意 这种js引入的方法！ 就相当于组件进行引入的
             },
             handleSelectionChange(val) { this.multipleSelection = val;}, //更新 表格中每次选中/取消选中的  集合变化
             addSaveTodo() {  this.getuser();},  // location.reload()// 刷新整个页面
@@ -111,8 +111,8 @@
             },
             handleEdit: function (index,row) {
                 this.$store.state.dialog_store.edit_show=true;
-                this.$store.state.dialog_store.edit_model = this.tableData[index];
-                console.log(this.tableData[index],'1111111111111111111')
+                this.$store.state.dialog_store.edit_model = JSON.parse( JSON.stringify(this.tableData[index]) ); // 先转换为字符串，然后再转换
+
             },
         }
     }

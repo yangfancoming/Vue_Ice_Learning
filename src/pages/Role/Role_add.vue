@@ -1,17 +1,20 @@
 <template>
-
+    <!-- name  remark  sort  isenable -->
   <el-dialog title="新增" width="30%"   center   :visible.sync="add_show" :before-close="beforeClose">   <!-- sos 这里不能使用 this.$store.state.dialog_store.show=true; 因为计算属性 需要 引入mapGetters 写成单变量形式 show_state -->
     <el-form  :model="role"  ref="ruleForm" :rules="rules" class="demo-form-inline" >
-        <el-form-item prop="username" label="角色名称" :label-width="formLabelWidth">
-            <el-input v-model="role.username"  placeholder="请输入 角色名称"></el-input>
+        <el-form-item prop="name" label="角色名称" :label-width="formLabelWidth">
+            <el-input v-model="role.name"  placeholder="请输入 角色名称"></el-input>
         </el-form-item>
 
-        <el-form-item prop="name" label="显示顺序" :label-width="formLabelWidth">
-            <el-input v-model="role.name"  placeholder="请输入 显示顺序"></el-input>
+        <el-form-item prop="sort" label="显示顺序" :label-width="formLabelWidth">
+            <el-input v-model.number="role.sort"  placeholder="请输入 显示顺序"></el-input>
         </el-form-item>
 
-        <el-form-item prop="isenable" label="是否启用" :label-width="formLabelWidth" align="center" >
-            <el-switch v-model="role.isenable" :value ="role.isenable"  inactive-text="禁用" active-text="启用" active-color="#13ce66" >  </el-switch>
+        <el-form-item prop="isenable" label="是否启用" :label-width="formLabelWidth" >
+            <el-select  align="center"  v-model="role.isenable"  placeholder="请选择 "> <!--style="width: 185px;" -->
+                <el-option align="center"  label="启用" value="1"></el-option>
+                <el-option align="center"  label="禁用" value="0"></el-option>
+            </el-select>
         </el-form-item>
 
         <el-form-item prop="remark" label="备注信息" :label-width="formLabelWidth">
@@ -37,44 +40,32 @@ import { mapGetters ,mapState} from 'vuex'
       },
 
       data() {
-        const Myvalidate = (rule, value, callback) => {
-            if (!validateMobile(value)) {
-                callback(new Error('请输入正确手机号码！'))
-            }
-        }
-      return {
-          isenable:1,
-          role:{      // sos 这里的 对象名 不能与 edit 组件中的  对象名 相同  否则 点击编辑后  再点击新增 会记录回显的信息
-              isenable:'1', //  启用/禁用状态 需要在这里初始化默认值  否则 新增的时候 会默认为空 而不是 true/false
-          },
-          formLabelWidth: '80px',
-        rules: {
-            username: [
-                { required: true, message: '请输入 角色名称', trigger: 'blur' }, //为空时 提示信息
-                {  min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' } ],  // 验证不通过时 提示信息
-            name: [
-                { required: true, message: '请输入 显示顺序', trigger: 'blur' }, //为空时 提示信息
-                {  min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' } ],  // 验证不通过时 提示信息
-            sid: [
-                { required: true, message: '请输入 工号',trigger: 'blur'},
-                { type: 'number', message: '年龄必须为数字值'}],
-            dob: [
-                { type: 'string', required: true, message: '请选择日期', trigger: 'blur' }],
-            sex: [
-                { required: true, message: '请选择 性别', trigger: 'change' }       ],
-            remark: [
-                { required: true, message: '请输入 备注', trigger: 'blur' },
-                {  min: 3, max: 50, message: '长度在 3 到 50 个字符', trigger: 'blur' } ],  //
-            tel: [
-                { required: true,  trigger: 'blur',validator: Myvalidate  }], // sos  这里指定了 自定义验证 所以不能 使用message: '请选择日期' 属性 否则回调显示的验证信息就无法显示
-        },
-      }
-    },
+          return {
+              isenable:1,
+              role:{      // sos 这里的 对象名 不能与 edit 组件中的  对象名 相同  否则 点击编辑后  再点击新增 会记录回显的信息
+                  isenable:'1', //  启用/禁用状态 需要在这里初始化默认值  否则 新增的时候 会默认为空 而不是 true/false
+              },
+              formLabelWidth: '80px',
+              rules: {
+                  name: [
+                      { required: true, message: '请输入 角色名称', trigger: 'blur' }, //为空时 提示信息
+                      {  min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' } ],  // 验证不通过时 提示信息
+                  sort: [
+                      { required: true, message: '请输入 显示顺序',trigger: 'blur'},
+                      { type: 'number', message: '年龄必须为数字值'}],
+                  isenable: [
+                      { required: true, message: '请选择 是否启用', trigger: 'change' }       ],
+                  remark: [
+                      { required: true, message: '请输入 备注', trigger: 'blur' },
+                      {  min: 3, max: 50, message: '长度在 3 到 50 个字符', trigger: 'blur' } ],  //
+              },
+          }
+      },
 
     watch: {
         add_show: function (newQuestion, oldQuestion) {
             console.log(newQuestion,oldQuestion);
-            if(newQuestion){this.role = {}; this.role.isenable= true; }// 监视 新增框弹出  如果弹出则 清空弹出框中的所有内容 防止记录上次内容 fuck 每次都不能正确回显 是因为这里清空了 我日！！！！！！1
+            if(newQuestion){this.role = {}; }// 监视 新增框弹出  如果弹出则 清空弹出框中的所有内容 防止记录上次内容 fuck 每次都不能正确回显 是因为这里清空了 我日！！！！！！1
             else {this.cancelFieldValidate('ruleForm')} // 监视 关闭新增框 时 清除校检信息 防止记录上次的校检信息
         },
     },
