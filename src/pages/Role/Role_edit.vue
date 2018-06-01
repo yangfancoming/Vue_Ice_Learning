@@ -11,7 +11,7 @@
           </el-form-item>
 
           <el-form-item prop="isenable" label="是否启用" :label-width="formLabelWidth" >
-              <el-select  align="center"  v-model="edit_model.isenable"  placeholder="请选择 "> <!--style="width: 185px;" -->
+              <el-select  align="center"  v-model="edit_model.isenable"  placeholder="请选择 "> <!-- style="width: 185px;" -->
                   <el-option align="center"  label="启用" :value="1"></el-option>
                   <el-option align="center"  label="禁用" :value="0"></el-option>
               </el-select>

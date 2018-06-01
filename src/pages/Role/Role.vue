@@ -46,7 +46,7 @@
                   </div>
               </template>
           </el-table-column>
-          <el-table-column label="操作" align="center" fixed="right" width="350">     <!--align="center" 列内容居中显示 -->
+          <el-table-column label="操作" align="center" fixed="right" width="300">     <!--align="center" 列内容居中显示 -->
               <template slot-scope="scope">
                   <el-button size="mini" type="success" icon="el-icon-edit" v-on:click="handleEdit(scope.$index, scope.row)">编辑</el-button>
                   <el-button size="mini" type="danger" icon="el-icon-delete"  v-on:click="handleDelete(scope.$index, scope.row)">删除</el-button>
