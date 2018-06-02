@@ -24,6 +24,7 @@
                   <el-button type="warning" icon="el-icon-circle-plus-outline" @click="$store.state.dialog_store.add_show=true" >新增</el-button>
                   <el-button type="primary" icon="el-icon-search" >查询</el-button>  <!--@click="queryList"-->
                   <el-button type="danger" icon="el-icon-delete" v-on:click="batchDelete" :disabled="this.multipleSelection.length === 0">批量删除</el-button>
+                  <el-button  type="info" @click="resetForm('listQuery')">重置</el-button>
               </el-form-item>
 
               <!--<el-form-item >-->
@@ -36,9 +37,6 @@
                   <!--<el-button  type="primary"  icon="el-icon-upload2"  @click="Export">导出</el-button>-->
               <!--</el-form-item>-->
 
-              <el-form-item >
-                  <el-button  type="info" @click="resetForm('listQuery')">重置</el-button>
-              </el-form-item>
           </div>
       </el-form>
       <!--@row-click="rowclick" -->
