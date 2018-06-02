@@ -7,6 +7,7 @@ import Dashboard from './pages/Dashboard';
 import NotFound from './pages/NotFound';
 
 import Vuex from './pages/Vuex/Vuex.vue'; // sos 2. 这里加入 新增页面信息
+import Freemarker from './pages/Freemarker/Freemarker.vue'; //   freemarker
 import User from './pages/User/User.vue';
 import Role from './pages/Role/Role.vue';
 import Login from './pages/Login/Login.vue';
@@ -33,6 +34,7 @@ const routerConfig = [
     children: [
       { path: '/table/basic', layout: HeaderAsideLayout, component: NotFound },
       { path: '/table/fixed', layout: HeaderAsideLayout, component: NotFound },
+      { path: '/table/freemarker', layout: HeaderAsideLayout, component: Freemarker },
     ],
   },
   {

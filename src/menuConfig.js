@@ -24,6 +24,7 @@ const asideMenuConfig = [
     children: [
       { path: '/basic', name: '基础表格' },
       { path: '/fixed', name: '固定表格' },
+      { path: '/freemarker', name: 'Freemarker' },
     ],
   },
   {
