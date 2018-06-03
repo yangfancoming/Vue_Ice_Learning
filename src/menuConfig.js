@@ -14,6 +14,7 @@ const asideMenuConfig = [
       { path: '/veeValidate', name: '分析页' },
       { path: '/user', name: '用户管理' },
       { path: '/role', name: '角色管理' },
+      { path: '/permission', name: '权限管理' },
       { path: '/vuex', name: 'vuex' }, // sos 1. 这里加入 新增页面信息
       { path: '/monitor', name: '监控页' },
       { path: '/workplace', name: '工作台' },

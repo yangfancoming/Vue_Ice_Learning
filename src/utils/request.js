@@ -31,7 +31,7 @@ axios.interceptors.request.use((config) => {
 axios.interceptors.response.use((res) =>{
     // console.log(res.data,'返回状态判断.');
     if(!res.data.success){
-        console.log('ok' + 333)
+        // console.log('ok' + 333)
         // return Promise.reject(res); // sos 在一个promise链中，只要任何一个promise被reject，该链就被破坏了，reject之后的promise都不会再执行，而是直接调用.catch方法。
     }
     return res;
