@@ -76,7 +76,7 @@ import {StrToGMT,GMTToStr} from '../../utils/times.js';
                     console.log(this.edit_model,'PATCH')
 //                    console.log(this.edit_model.dob,'11111111111111dob')
 //                    this.edit_model.dob =  GMTToStr(this.edit_model.dob); // 1. sos 转换
-                    this.$axios.post('api/sys_user/PATCH', this.edit_model).then(function (res) {  // fuck  为什么 这里使用 .patch 后台配合使用 method= RequestMethod.PATCH 就提示禁止跨域请求呢？
+                    this.$axios.post('api/sys_permission/PATCH', this.edit_model).then(function (res) {  // fuck  为什么 这里使用 .patch 后台配合使用 method= RequestMethod.PATCH 就提示禁止跨域请求呢？
                         _this.$message.success('修改成功！');
                         _this.$store.state.dialog_store.edit_show=false
                         _this.$emit('addSaveTodo'); // 添加成功后 隐藏自身对话框

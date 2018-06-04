@@ -13,6 +13,7 @@ import Role from './pages/Role/Role.vue';
 import Login from './pages/Login/Login.vue';
 import VeeValidate from './pages/VeeValidate/VeeValidate.vue';
 import Permission from './pages/Permission/Permission.vue';
+import Monitor from './pages/Monitor/Monitor.vue';
 import ExceptionPages from './pages/ExceptionPages/ExceptionPages.vue';
 
 const routerConfig = [
@@ -26,6 +27,7 @@ const routerConfig = [
       { path: '/dashboard/role',layout: HeaderAsideLayout,component: Role,},
       { path: '/dashboard/permission',layout: HeaderAsideLayout,component: Permission,},
       { path: '/dashboard/vuex', layout: HeaderAsideLayout, component: Vuex }, // sos 3. 这里加入 新增页面信息
+      { path: '/dashboard/monitor',layout: HeaderAsideLayout,component: Monitor,},
       { path: '/dashboard/workplace',layout: HeaderAsideLayout,component: NotFound,},
     ],
   },
